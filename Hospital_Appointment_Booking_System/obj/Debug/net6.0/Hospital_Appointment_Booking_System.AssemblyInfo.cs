@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("cff270d1-227b-44c7-b27d-381bebf70312")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hospital_Appointment_Booking_System")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
