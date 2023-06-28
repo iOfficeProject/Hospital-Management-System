@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\julik\\Desktop\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {}
+    "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {}
   },
   "projects": {
-    "C:\\Users\\julik\\Desktop\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {
+    "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\julik\\Desktop\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
+        "projectUniqueName": "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
         "projectName": "Hospital_Appointment_Booking_System",
-        "projectPath": "C:\\Users\\julik\\Desktop\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
+        "projectPath": "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
         "packagesPath": "C:\\Users\\julik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\julik\\Desktop\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System\\obj\\",
+        "outputPath": "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -43,6 +43,26 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.15.1, )"
