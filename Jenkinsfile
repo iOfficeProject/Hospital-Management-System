@@ -46,7 +46,7 @@ pipeline {
 					echo "Push to docker hub"
                     docker.withRegistry( 'https://registry.hub.docker.com ', registryCredential )  {
                             echo "${img}"
-                            sh "docker push ${img}"
+                            sh "docker push registry.hub.docker.com ${img}"
 							//dockerImg.push()
 							//dockerImg.push('latest') //one more push for latest tag
 						}
