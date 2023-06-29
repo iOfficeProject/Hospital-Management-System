@@ -120,3 +120,4 @@ C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appoint
 C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\ref\Hospital_Appointment_Booking_System.dll
 C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

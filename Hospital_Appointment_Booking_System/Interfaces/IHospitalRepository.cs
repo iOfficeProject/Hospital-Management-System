@@ -5,5 +5,6 @@ namespace Hospital_Appointment_Booking_System.Interfaces
     public interface IHospitalRepository
     {
         Task<List<User>> GetAllUser();
+        Task AddUser(User user);
     }
 }

@@ -15,6 +15,12 @@ namespace Hospital_Appointment_Booking_System.Repositories
 
             }
 
+        public async Task AddUser(User user)
+        {
+            _dbContext.Users.Add(user);
+            await _dbContext.SaveChangesAsync(); 
+        }
+
         public async Task<List<User>> GetAllUser()
         {
             return await _dbContext.Set<User>().ToListAsync();

@@ -3,12 +3,12 @@
     public class UserDTO
     {
         public int UserId { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
         public long MobileNumber { get; set; }
-        public RoleDTO Role { get; set; }
-        public SpecializationDTO Specialization { get; set; }
-        public HospitalDTO Hospital { get; set; }
+        public int? RoleId { get; set; }
+        public int? SpecializationId { get; set; }
+        public int? HospitalId { get; set; }
     }
 }
