@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'SH-devops', url: 'https://github.com/iOfficeProject/hospital_appointment_booking_system.git'
+                git branch: 'master', url: 'https://github.com/iOfficeProject/hospital_appointment_booking_system.git'
                 sh 'ls -la'
             }
         }
@@ -28,7 +28,8 @@ pipeline {
             steps {
 				echo "Building our image"
 				script {
-					dockerImg = docker.build("${img}")
+					sh "docker build -t ${img} ."
+                    
                 }
             }
         }
