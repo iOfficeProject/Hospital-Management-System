@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "KFvAgPNteFGZOpDpo5ANE4CABcma3+nkdx2dSkCrKxjlXHntP+WTsfV2aT4+E7zy1S6mm3r56afWXoecquPuWA==",
+  "dgSpecHash": "y1os9SlQkZ5Zym+sPKx5QztyuoZmAJsMewparCo+Ce9WL2CqYeJacGBs/Svl6X0HFfq5/CcTy9UmC55+5jJWVA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
+  "projectFilePath": "C:\\Users\\julik\\source\\repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\julik\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\julik\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\julik\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\julik\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\julik\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\julik\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\julik\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\julik\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.0\\microsoft.entityframeworkcore.6.0.0.nupkg.sha512",

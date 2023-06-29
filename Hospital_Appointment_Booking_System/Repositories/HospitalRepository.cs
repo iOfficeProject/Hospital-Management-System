@@ -4,35 +4,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hospital_Appointment_Booking_System.Repositories
 {
-    public class HospitalRepository : IHospitalRepository
-    {
-        private readonly string _ConnectionString;
-        private readonly string _context;
-
-        public HospitalRepository(IConfiguration configuration)
+        public class HospitalRepository : IHospitalRepository
         {
-            _ConnectionString = configuration.GetConnectionString("DefaultConnection");
-    
-        }
+            readonly Master_Hospital_ManagementContext _dbContext = new();
 
-        public async Task<int> CreateAsset(MasterUser masterUser)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<int> CreateUser(MasterUser masterUser)
-        {
-            throw new NotImplementedException();
-        }
+            public HospitalRepository(Master_Hospital_ManagementContext dbContext)
+            {
+                _dbContext = dbContext;
 
-        public Task<IEnumerable<MasterUser>> GetUser()
-        {
-            throw new NotImplementedException();
-        }
+            }
 
-        public Task<MasterUser> GetUserById(int id)
+        public async Task<List<User>> GetAllUser()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<User>().ToListAsync();
         }
     }
-}
+ }
+
