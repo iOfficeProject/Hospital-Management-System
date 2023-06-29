@@ -36,7 +36,7 @@ pipeline {
         stage('Run') {
 			steps{
 				echo "Run image"
-				sh returnStdout: true, script: "docker run --rm -d --name ${JOB_NAME} -p 8081:5000 ${img}"
+				sh returnStdout: true, script: "docker run --rm -d --name ${JOB_NAME} -p 8082:5000 ${img}"
 			}
 		}
 
