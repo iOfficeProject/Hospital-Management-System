@@ -28,7 +28,7 @@ pipeline {
             steps {
 				echo "Building our image"
 				script {
-					dockerImg = docker.build("${img}")
+					sh "docker build -f /root/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System/Dockerfile -t ${img} ."
                 }
             }
         }
