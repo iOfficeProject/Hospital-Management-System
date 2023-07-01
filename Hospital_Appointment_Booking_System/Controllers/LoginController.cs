@@ -1,5 +1,6 @@
 ﻿using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +11,7 @@ using System.Text;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("api/login")]
     [ApiController]
     public class LoginController: ControllerBase
