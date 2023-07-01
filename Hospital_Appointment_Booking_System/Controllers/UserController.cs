@@ -3,11 +3,13 @@ using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
-    [Authorize]
+   // [Authorize]
+    [EnableCors("MyPolicy")]
     [Route("api/users")]
     [ApiController]
     public class UserController:ControllerBase
