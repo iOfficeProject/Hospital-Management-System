@@ -32,6 +32,11 @@ namespace Hospital_Appointment_Booking_System.Controllers
             {
                 var user = await GetUser(_userData.Email, _userData.Password);
 
+                var role = await _context.Roles.FindAsync(user.RoleId);
+                var roleName = role?.RoleName;
+
+
+
                 if (user != null)
                 {
                     //create claims details based on the user information
@@ -40,7 +45,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                         new Claim("Password", user.Password),
-                        new Claim("Email", user.Email)
+                        new Claim("Email", user.Email)                        
                     };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -52,8 +57,8 @@ namespace Hospital_Appointment_Booking_System.Controllers
                         expires: DateTime.UtcNow.AddMinutes(5),
                         signingCredentials: signIn);
 
-                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
-                 
+                    return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(token), roleName});
+
                 }
                 else
                 {
