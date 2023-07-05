@@ -28,7 +28,8 @@ pipeline {
             steps {
 				echo "Building our image"
 				script {
-					sh "docker build -f /root/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System/Dockerfile -t ${img} ."
+                    dockerImg = docker.build("${img}")
+					//sh "docker build -f /root/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System/Dockerfile -t ${img} ."
                 }
             }
         }
@@ -36,7 +37,7 @@ pipeline {
         stage('Run') {
 			steps{
 				echo "Run image"
-				sh returnStdout: true, script: "docker run --rm -d --name ${JOB_NAME} -p 8082:5000 ${img}"
+				sh returnStdout: true, script: "docker run --rm -d --name ${JOB_NAME} -p 80:7264 ${img}"
 			}
 		}
 
@@ -46,12 +47,15 @@ pipeline {
 					echo "Push to docker hub"
                     docker.withRegistry( 'https://registry.hub.docker.com ', registryCredential )  {
                             echo "${img}"
-                            sh "docker push registry.hub.docker.com/${img}"
-							//dockerImg.push()
+                            sh "docker images"
+                            sh "hostname"
+                            //sh "docker push registry.hub.docker.com/${img}"
+							dockerImg.push()
 							//dockerImg.push('latest') //one more push for latest tag
 						}
                 }
             }
+
         }
 		
           

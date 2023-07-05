@@ -1,4 +1,4 @@
-﻿using Hospital_Appointment_Booking_System.Interfaces;
+using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +7,6 @@ namespace Hospital_Appointment_Booking_System.Repositories
         public class RoleRepository : IRoleRepository
         {
             readonly Master_Hospital_ManagementContext _dbContext = new();
-
 
             public RoleRepository(Master_Hospital_ManagementContext dbContext)
             {
@@ -39,5 +38,4 @@ namespace Hospital_Appointment_Booking_System.Repositories
         {
             return await _dbContext.Set<Role>().ToListAsync();
         }
-    }
 }
