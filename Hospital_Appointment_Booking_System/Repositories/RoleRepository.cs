@@ -1,6 +1,9 @@
-﻿namespace Hospital_Appointment_Booking_System.Repositories
+﻿using Hospital_Appointment_Booking_System.Interfaces;
+
+namespace Hospital_Appointment_Booking_System.Repositories
 {
-    public class RoleRepository
+    public class RoleRepository : IRoleRepository
     {
+       
     }
 }
