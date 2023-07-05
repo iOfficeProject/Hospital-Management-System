@@ -28,7 +28,7 @@ pipeline {
             steps {
 				echo "Building our image"
 				script {
-					sh "docker build -t ${img} ."
+					dockerImg = docker.build("${img}")
                     
                 }
             }
