@@ -28,8 +28,8 @@ pipeline {
             steps {
 				echo "Building our image"
 				script {
-					dockerImg = docker.build("${img}")
-                    
+					//dockerImg = docker.build("${img}")
+                    sh "docker build -f /root/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System/Dockerfile -t ${img} ."
                 }
             }
         }
@@ -41,17 +41,7 @@ pipeline {
 			}
 		}
 
-        stage('Release') {
-            steps {
-				script {
-					echo "Push to docker hub"
-                    docker.withRegistry( 'https://registry.hub.docker.com ', registryCredential )  {
-							dockerImg.push()
-							//dockerImg.push('latest') //one more push for latest tag
-						}
-                }
-            }
-        }
+        
 		
           
       
