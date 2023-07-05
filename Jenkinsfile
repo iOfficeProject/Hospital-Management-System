@@ -47,6 +47,7 @@ pipeline {
 					echo "Push to docker hub"
                     docker.withRegistry( 'https://registry.hub.docker.com ', registryCredential )  {
                             echo "${img}"
+                            sh "docker images"
                             sh "hostname"
                             sh "docker push registry.hub.docker.com/${img}"
 							//dockerImg.push()
