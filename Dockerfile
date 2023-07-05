@@ -1,20 +1,25 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+# Use the .NET Core SDK image as the base image
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+
+# Set the working directory inside the container
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj", "Hospital_Appointment_Booking_System/"]
-RUN dotnet restore "Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj"
-COPY . .
-WORKDIR "/src/Hospital_Appointment_Booking_System"
-RUN dotnet build "Hospital_Appointment_Booking_System.csproj" -c Release -o /app/build
+# Copy the project files to the container
+COPY *.csproj ./
+RUN dotnet restore
 
-FROM build AS publish
-RUN dotnet publish "Hospital_Appointment_Booking_System.csproj" -c Release -o /app/publish
+# Copy the rest of the application code to the container
+COPY . ./
+
+# Build the application
+RUN dotnet publish -c Release -o out
+
+# Create the final image using the .NET Core runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build-env /app/out .
 
 FROM base AS final
 WORKDIR /app
