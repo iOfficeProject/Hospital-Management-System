@@ -9,14 +9,3 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj", "Hospital_Appointment_Booking_System/"]
 RUN dotnet restore "Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj"
-COPY . .
-WORKDIR "/src/Hospital_Appointment_Booking_System"
-RUN dotnet build "Hospital_Appointment_Booking_System.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "Hospital_Appointment_Booking_System.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Hospital_Appointment_Booking_System.dll"]
