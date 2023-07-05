@@ -8,3 +8,4 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj", "Hospital_Appointment_Booking_System/"]
+RUN dotnet restore "Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj"
