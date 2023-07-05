@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {}
+    "D:\\Ramp Up and Training by Cybage\\Practice\\Hospital Appointemnt Booking System\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {}
   },
   "projects": {
-    "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {
+    "D:\\Ramp Up and Training by Cybage\\Practice\\Hospital Appointemnt Booking System\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
+        "projectUniqueName": "D:\\Ramp Up and Training by Cybage\\Practice\\Hospital Appointemnt Booking System\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
         "projectName": "Hospital_Appointment_Booking_System",
-        "projectPath": "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
-        "packagesPath": "C:\\Users\\julik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\julik\\Desktop\\GitHospitalAppointmentBooking\\Hospital_Appointment_Booking_System\\obj\\",
+        "projectPath": "D:\\Ramp Up and Training by Cybage\\Practice\\Hospital Appointemnt Booking System\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
+        "packagesPath": "C:\\Users\\ratikantk\\.nuget\\packages\\",
+        "outputPath": "D:\\Ramp Up and Training by Cybage\\Practice\\Hospital Appointemnt Booking System\\Hospital_Appointment_Booking_System\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\julik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ratikantk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
