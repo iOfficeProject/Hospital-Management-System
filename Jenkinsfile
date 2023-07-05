@@ -28,8 +28,8 @@ pipeline {
             steps {
 				echo "Building our image"
 				script {
-                    //dockerImg = docker.build("${img}")
-					sh "docker build -f /root/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System/Dockerfile -t ${img} ."
+                    dockerImg = docker.build("${img}")
+					//sh "docker build -f /root/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System/Dockerfile -t ${img} ."
                 }
             }
         }
@@ -49,8 +49,8 @@ pipeline {
                             echo "${img}"
                             sh "docker images"
                             sh "hostname"
-                            sh "docker push registry.hub.docker.com/${img}"
-							//dockerImg.push()
+                            //sh "docker push registry.hub.docker.com/${img}"
+							dockerImg.push()
 							//dockerImg.push('latest') //one more push for latest tag
 						}
                 }
