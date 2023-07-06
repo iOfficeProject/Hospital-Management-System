@@ -58,3 +58,134 @@ C:\Users\julik\Desktop\GitHospitalAppointmentBooking\Hospital_Appointment_Bookin
 C:\Users\julik\Desktop\GitHospitalAppointmentBooking\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.pdb
 C:\Users\julik\Desktop\GitHospitalAppointmentBooking\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.genruntimeconfig.cache
 C:\Users\julik\Desktop\GitHospitalAppointmentBooking\Hospital_Appointment_Booking_System\obj\Debug\net6.0\ref\Hospital_Appointment_Booking_System.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.csproj.AssemblyReference.cache
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.AssemblyInfoInputs.cache
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.AssemblyInfo.cs
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.csproj.CoreCompileInputs.cache
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\refint\Hospital_Appointment_Booking_System.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.pdb
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\appsettings.json
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.exe
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.deps.json
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.runtimeconfig.json
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.pdb
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Humanizer.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Runtime.Caching.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\scopedcss\bundle\Hospital_Appointment_Booking_System.styles.css
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.csproj.CopyComplete
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.genruntimeconfig.cache
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\obj\Debug\net6.0\ref\Hospital_Appointment_Booking_System.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\julik\source\repos\hospital_appointment_booking_system\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\appsettings.Development.json
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\appsettings.json
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.exe
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.deps.json
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.runtimeconfig.json
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Hospital_Appointment_Booking_System.pdb
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\AutoMapper.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Humanizer.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Runtime.Caching.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\System.Windows.Extensions.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.csproj.AssemblyReference.cache
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.GeneratedMSBuildEditorConfig.editorconfig
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.AssemblyInfoInputs.cache
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.AssemblyInfo.cs
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.csproj.CoreCompileInputs.cache
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.MvcApplicationPartsAssemblyInfo.cs
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.MvcApplicationPartsAssemblyInfo.cache
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets\msbuild.Hospital_Appointment_Booking_System.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets\msbuild.build.Hospital_Appointment_Booking_System.props
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Hospital_Appointment_Booking_System.props
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Hospital_Appointment_Booking_System.props
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets.pack.json
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets.build.json
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\staticwebassets.development.json
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\scopedcss\bundle\Hospital_Appointment_Booking_System.styles.css
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.csproj.CopyComplete
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\refint\Hospital_Appointment_Booking_System.dll
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.pdb
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\Hospital_Appointment_Booking_System.genruntimeconfig.cache
+D:\Ramp Up and Training by Cybage\Practice\Hospital Appointemnt Booking System\Hospital_Appointment_Booking_System\obj\Debug\net6.0\ref\Hospital_Appointment_Booking_System.dll

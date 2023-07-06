@@ -2,7 +2,7 @@
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
-    public class HomeController : Controller
+    public class SlotController : Controller
     {
         public IActionResult Index()
         {
