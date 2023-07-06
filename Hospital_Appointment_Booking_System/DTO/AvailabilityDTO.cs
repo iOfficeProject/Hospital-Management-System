@@ -7,6 +7,6 @@
         public DateTime? Date { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-        public UserDTO User { get; set; }
+        public int? UserId { get; set; }
     }
 }
