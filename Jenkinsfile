@@ -28,8 +28,13 @@ pipeline {
             steps {
 				echo "Building our image"
 				script {
+
+					dockerImg = docker.build("${img}")
+                    //sh "docker build -f /root/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System/Dockerfile -t ${img} ."
+
                     dockerImg = docker.build("${img}")
-					//sh "docker build -f /root/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System/Dockerfile -t ${img} ."
+					
+
                 }
             }
         }
@@ -37,9 +42,13 @@ pipeline {
         stage('Run') {
 			steps{
 				echo "Run image"
-				sh returnStdout: true, script: "docker run --rm -d --name ${JOB_NAME} -p 83:7264 ${img}"
+
+				sh returnStdout: true, script: "docker run --rm -d --name ${JOB_NAME} -p 84:80 ${img}"
 			}
 		}
+
+        
+
 
         stage('Release') {
             steps {
@@ -57,6 +66,7 @@ pipeline {
             }
 
         }
+
 		
           
       
