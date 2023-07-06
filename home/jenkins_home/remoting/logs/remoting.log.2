@@ -1,0 +1,91 @@
+Jul 05, 2023 11:26:14 AM hudson.remoting.jnlp.Main createEngine
+INFO: Setting up agent: slave-1
+Jul 05, 2023 11:26:14 AM hudson.remoting.Engine startEngine
+INFO: Using Remoting version: 3131.vf2b_b_798b_ce99
+Jul 05, 2023 11:26:14 AM org.jenkinsci.remoting.engine.WorkDirManager initializeWorkDir
+INFO: Using /root/Hospital_Appointment_Booking_System/home/jenkins_home/remoting as a remoting work directory
+Jul 05, 2023 11:26:15 AM hudson.remoting.jnlp.Main$CuiListener status
+INFO: Locating server among [http://localhost:8080/]
+Jul 05, 2023 11:26:15 AM org.jenkinsci.remoting.engine.JnlpAgentEndpointResolver resolve
+INFO: Remoting server accepts the following protocols: [JNLP4-connect, Ping]
+Jul 05, 2023 11:26:15 AM hudson.remoting.jnlp.Main$CuiListener status
+INFO: Agent discovery successful
+  Agent address: localhost
+  Agent port:    50000
+  Identity:      36:b1:79:2f:fa:72:52:60:0a:98:73:cd:8a:aa:87:45
+Jul 05, 2023 11:26:15 AM hudson.remoting.jnlp.Main$CuiListener status
+INFO: Handshaking
+Jul 05, 2023 11:26:15 AM hudson.remoting.jnlp.Main$CuiListener status
+INFO: Connecting to localhost:50000
+Jul 05, 2023 11:26:15 AM hudson.remoting.jnlp.Main$CuiListener status
+INFO: Trying protocol: JNLP4-connect
+Jul 05, 2023 11:26:15 AM org.jenkinsci.remoting.protocol.impl.BIONetworkLayer$Reader run
+INFO: Waiting for ProtocolStack to start.
+Jul 05, 2023 11:26:16 AM hudson.remoting.jnlp.Main$CuiListener status
+INFO: Remote identity confirmed: 36:b1:79:2f:fa:72:52:60:0a:98:73:cd:8a:aa:87:45
+Jul 05, 2023 11:26:16 AM hudson.remoting.jnlp.Main$CuiListener status
+INFO: Connected
+Jul 05, 2023 11:26:44 AM org.jenkinsci.plugins.workflow.log.TaskListenerDecorator$DecoratedTaskListener getLogger
+WARNING: null
+java.lang.IllegalStateException: Expected 1 instance of hudson.plugins.gradle.injection.InjectionConfig but got 0
+	at hudson.ExtensionList.lookupSingleton(ExtensionList.java:454)
+	at hudson.plugins.gradle.injection.InjectionConfig.get(InjectionConfig.java:81)
+	at hudson.plugins.gradle.injection.GradleEnterpriseExceptionTaskListenerDecoratorFactory$GradleEnterpriseExceptionTaskListenerDecorator.decorate(GradleEnterpriseExceptionTaskListenerDecoratorFactory.java:43)
+	at org.jenkinsci.plugins.workflow.log.TaskListenerDecorator$DecoratedTaskListener.getLogger(TaskListenerDecorator.java:253)
+	at org.jenkinsci.plugins.workflow.log.TaskListenerDecorator$CloseableTaskListener.getLogger(TaskListenerDecorator.java:296)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:2801)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:2762)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:2757)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommand(CliGitAPIImpl.java:2051)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommand(CliGitAPIImpl.java:2063)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.hasGitRepo(CliGitAPIImpl.java:405)
+	at hudson.plugins.git.GitAPI.hasGitRepo(GitAPI.java:281)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at hudson.remoting.RemoteInvocationHandler$RPCRequest.perform(RemoteInvocationHandler.java:924)
+	at hudson.remoting.RemoteInvocationHandler$RPCRequest.call(RemoteInvocationHandler.java:902)
+	at hudson.remoting.RemoteInvocationHandler$RPCRequest.call(RemoteInvocationHandler.java:853)
+	at hudson.remoting.UserRequest.perform(UserRequest.java:211)
+	at hudson.remoting.UserRequest.perform(UserRequest.java:54)
+	at hudson.remoting.Request$2.run(Request.java:377)
+	at hudson.remoting.InterceptingExecutorService.lambda$wrap$0(InterceptingExecutorService.java:78)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at hudson.remoting.Engine$1.lambda$newThread$0(Engine.java:125)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
+Jul 05, 2023 11:26:49 AM org.jenkinsci.plugins.workflow.log.TaskListenerDecorator$DecoratedTaskListener getLogger
+WARNING: null
+java.lang.IllegalStateException: Expected 1 instance of hudson.plugins.gradle.injection.InjectionConfig but got 0
+	at hudson.ExtensionList.lookupSingleton(ExtensionList.java:454)
+	at hudson.plugins.gradle.injection.InjectionConfig.get(InjectionConfig.java:81)
+	at hudson.plugins.gradle.injection.GradleEnterpriseExceptionTaskListenerDecoratorFactory$GradleEnterpriseExceptionTaskListenerDecorator.decorate(GradleEnterpriseExceptionTaskListenerDecoratorFactory.java:43)
+	at org.jenkinsci.plugins.workflow.log.TaskListenerDecorator$DecoratedTaskListener.getLogger(TaskListenerDecorator.java:253)
+	at org.jenkinsci.plugins.workflow.log.TaskListenerDecorator$CloseableTaskListener.getLogger(TaskListenerDecorator.java:296)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:2801)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:2762)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommandIn(CliGitAPIImpl.java:2757)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommand(CliGitAPIImpl.java:2051)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.launchCommand(CliGitAPIImpl.java:2063)
+	at org.jenkinsci.plugins.gitclient.CliGitAPIImpl.hasGitRepo(CliGitAPIImpl.java:405)
+	at hudson.plugins.git.GitAPI.hasGitRepo(GitAPI.java:281)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at hudson.remoting.RemoteInvocationHandler$RPCRequest.perform(RemoteInvocationHandler.java:924)
+	at hudson.remoting.RemoteInvocationHandler$RPCRequest.call(RemoteInvocationHandler.java:902)
+	at hudson.remoting.RemoteInvocationHandler$RPCRequest.call(RemoteInvocationHandler.java:853)
+	at hudson.remoting.UserRequest.perform(UserRequest.java:211)
+	at hudson.remoting.UserRequest.perform(UserRequest.java:54)
+	at hudson.remoting.Request$2.run(Request.java:377)
+	at hudson.remoting.InterceptingExecutorService.lambda$wrap$0(InterceptingExecutorService.java:78)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at hudson.remoting.Engine$1.lambda$newThread$0(Engine.java:125)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+
