@@ -16,6 +16,7 @@ namespace Hospital_Appointment_Booking_System.Mapping
             CreateMap<HospitalDTO, Hospital>().ReverseMap();
             CreateMap<AvailabilityDTO, Availability>().ReverseMap();
             CreateMap<AppointmentDTO, Appointment>().ReverseMap();
+            //CreateMap<AppointmentInputDTO, Appointment>().ReverseMap();
         }
 
     }
