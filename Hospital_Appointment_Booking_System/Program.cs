@@ -11,7 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<Master_Hospital_ManagementContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IHospitalRepository, HospitalRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<ISpecializationRepository, SpecializationRepository>();
