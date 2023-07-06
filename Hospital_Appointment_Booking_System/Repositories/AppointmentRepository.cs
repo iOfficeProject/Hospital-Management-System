@@ -55,6 +55,15 @@ namespace Hospital_Appointment_Booking_System.Repositories
             _dbContext.Appointments.Remove(appointment);
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<IEnumerable<AppointmentDTO>> GetAppointmentsByUserId(int userId)
+        {
+            var appointments = await _dbContext.Appointments
+                .Include(a => a.User)
+                .Where(a => a.UserId == userId)
+                .ToListAsync();
+
+            return _mapper.Map<IEnumerable<AppointmentDTO>>(appointments);
+        }
 
     }
 }

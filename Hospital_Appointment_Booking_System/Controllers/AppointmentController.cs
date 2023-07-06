@@ -54,6 +54,13 @@ namespace Hospital_Appointment_Booking_System.Controllers
             await _appointmentRepository.DeleteAppointment(id);
             return Ok();
         }
+
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetAppointmentsByUserId(int userId)
+        {
+            var appointments = await _appointmentRepository.GetAppointmentsByUserId(userId);
+            return Ok(appointments);
+        }
     }
     
 }
