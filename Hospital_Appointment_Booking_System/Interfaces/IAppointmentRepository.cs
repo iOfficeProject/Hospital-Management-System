@@ -9,5 +9,6 @@ namespace Hospital_Appointment_Booking_System.Interfaces
         Task AddAppointment(AppointmentInputDTO appointmentDto);
         Task UpdateAppointment(AppointmentInputDTO appointmentDto);
         Task DeleteAppointment(int id);
+        Task<IEnumerable<AppointmentDTO>> GetAppointmentsByUserId(int userId);
     }
 }
