@@ -10,6 +10,7 @@ WORKDIR /src
 COPY ["Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj", "Hospital_Appointment_Booking_System/"]
 #COPY *.csproj ./
 RUN dotnet restore "Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj"
+
 #RUN dotnet restore "/Hospital_Appointment_Booking_System/Hospital_Appointment_Booking_System.csproj"
 COPY . .
 WORKDIR "/src/Hospital_Appointment_Booking_System"
@@ -22,3 +23,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Hospital_Appointment_Booking_System.dll"]
+
