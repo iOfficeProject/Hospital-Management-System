@@ -5,51 +5,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hospital_Appointment_Booking_System.Repositories
 {
-    public class HospitalRepository : IHospitalRepository
-    {
-        private readonly Master_Hospital_ManagementContext _context;
-
-        public HospitalRepository(Master_Hospital_ManagementContext context)
+        public class HospitalRepository : IHospitalRepository
         {
-            _context = context;
-        }
+            readonly Master_Hospital_ManagementContext _dbContext = new();
 
-        public async Task<IEnumerable<Hospital>> GetAllAsync()
-        {
-            return await _context.Hospitals.ToListAsync();
-        }
 
-        public async Task<Hospital> GetByIdAsync(int hospitalId)
-        {
-            return await _context.Hospitals.FindAsync(hospitalId);
-        }
-
-        public async Task AddAsync(Hospital hospital)
-        {
-            await _context.Hospitals.AddAsync(hospital);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(int hospitalId, Hospital hospital)
-        {
-            var existingHospital = await _context.Hospitals.FindAsync(hospitalId);
-            if (existingHospital != null)
+            public HospitalRepository(Master_Hospital_ManagementContext dbContext)
             {
-                existingHospital.HospitalName = hospital.HospitalName;
-                existingHospital.Location = hospital.Location;
+                _dbContext = dbContext;
 
-                await _context.SaveChangesAsync();
             }
+
+        public async Task AddUser(User user)
+        {
+            _dbContext.Users.Add(user);
+            await _dbContext.SaveChangesAsync(); 
         }
 
-        public async Task DeleteAsync(int hospitalId)
+        public async Task AddDoctor(User user)
         {
-            var hospital = await _context.Hospitals.FindAsync(hospitalId);
-            if (hospital != null)
-            {
-                _context.Hospitals.Remove(hospital);
-                await _context.SaveChangesAsync();
-            }
+            // Save user and role to the database
+            _dbContext.Users.Add(user);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<User>> GetAllUser()
+        {
+            return await _dbContext.Set<User>().ToListAsync();
+        }
+
+        public async Task<List<User>> GetDoctors(RoleDTO role)
+        {
+            List<User> doctors =await _dbContext.Users
+         .Where(u => u.Role.RoleName == "Doctor")
+        .ToListAsync();
+
+            return doctors;
         }
     }
-}
+ }
+

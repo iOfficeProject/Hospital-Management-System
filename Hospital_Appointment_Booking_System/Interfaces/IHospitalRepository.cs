@@ -1,13 +1,12 @@
-﻿using Hospital_Appointment_Booking_System.Models;
+﻿using Hospital_Appointment_Booking_System.DTO;
+using Hospital_Appointment_Booking_System.Models;
 
 namespace Hospital_Appointment_Booking_System.Interfaces
 {
     public interface IHospitalRepository
     {
-        Task<IEnumerable<Hospital>> GetAllAsync();
-        Task<Hospital> GetByIdAsync(int hospitalId);
-        Task AddAsync(Hospital hospital);
-        Task UpdateAsync(int hospitalId, Hospital hospital);
-        Task DeleteAsync(int hospitalId);
+        Task<List<User>> GetAllUser();
+        Task AddUser(User user);
+        Task<List<User>> GetDoctors(RoleDTO roledto);
     }
 }

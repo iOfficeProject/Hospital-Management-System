@@ -1,4 +1,5 @@
-﻿using Hospital_Appointment_Booking_System.DTO;
+﻿
+using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -14,16 +15,16 @@ namespace Hospital_Appointment_Booking_System.Controllers
     [ApiController]
     public class UserController: ControllerBase
     {
-        private readonly IUserRepository _IUserRepository;
-        public UserController(IUserRepository iUserRepository)
+        private readonly IHospitalRepository _IHospitalRepository;
+        public UserController(IHospitalRepository iHospitalRepository)
         {
-            _IUserRepository = iUserRepository;
+            _IHospitalRepository = iHospitalRepository;
         }
-         
+
         [HttpGet]
         public async Task<ActionResult<List<User>>> GetAllUsers()
         {
-            var users = await _IUserRepository.GetAllUser();
+            var users = await _IHospitalRepository.GetAllUser();
             if (users != null)
             {
                 var records = users.Select(u => new UserDTO
@@ -61,7 +62,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 HospitalId = userDto.HospitalId
             };
 
-            await _IUserRepository.AddUser(user);
+            await _IHospitalRepository.AddUser(user);
 
             return Ok(user);
         }
@@ -71,7 +72,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
         [Authorize]
         public async Task<ActionResult<List<User>>> GetDoctors(RoleDTO roledto)
         {
-                List<User> doctors = await _IUserRepository.GetDoctors(roledto);
+                List<User> doctors = await _IHospitalRepository.GetDoctors(roledto);
                 return Ok(doctors);
            
         }
