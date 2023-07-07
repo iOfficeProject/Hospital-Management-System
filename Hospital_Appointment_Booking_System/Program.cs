@@ -17,6 +17,8 @@ builder.Services.AddTransient<ISpecializationRepository, SpecializationRepositor
 builder.Services.AddTransient<ISlotRepository, SlotRepository>();
 builder.Services.AddTransient<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddTransient<IAvailabilityRepository, AvailabilityRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+
 builder.Services.AddControllers();
 
 // Add services to the container.
