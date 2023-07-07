@@ -18,7 +18,7 @@ RUN dotnet build "Hospital_Appointment_Booking_System.csproj" -c Release -o /app
 
 FROM build AS publish
 RUN dotnet publish "Hospital_Appointment_Booking_System.csproj" -c Release -o /app/publish /p:UseAppHost=false
-RUN echo 'Hello World!' > /var/www/html/index.html
+RUN echo 'Hello World!' > /html/index.html
 
 FROM base AS final
 WORKDIR /app
