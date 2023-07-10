@@ -21,7 +21,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             try
             {
-                var hospitals = await _hospitalRepository.GetAllAsync();
+                var hospitals = await _hospitalRepository.GetAllHospital();
                 return Ok(hospitals);
             }
             catch (Exception ex)
@@ -35,7 +35,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             try
             {
-                var hospital = await _hospitalRepository.GetByIdAsync(hospitalId);
+                var hospital = await _hospitalRepository.GetByIdHospital(hospitalId);
                 if (hospital == null)
                 {
                     return NotFound();
@@ -53,8 +53,16 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             try
             {
-                await _hospitalRepository.AddAsync(hospital);
-                return CreatedAtAction(nameof(GetHospital), new { hospitalId = hospital.HospitalId }, hospital);
+             
+                bool hospitalCreated = await _hospitalRepository.AddHospital(hospital);
+                if (!hospitalCreated)
+                {
+                    return Conflict("Hospital name already exists."); 
+                }
+
+                return Ok(hospital);
+
+                //return CreatedAtAction(nameof(GetHospital), new { hospitalId = hospital.HospitalId }, hospital);
             }
             catch (Exception ex)
             {
@@ -67,8 +75,8 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             try
             {
-                await _hospitalRepository.UpdateAsync(hospitalId, hospital);
-                var updatedHospital = await _hospitalRepository.GetByIdAsync(hospitalId);
+                await _hospitalRepository.UpdateHospital(hospitalId, hospital);
+                var updatedHospital = await _hospitalRepository.GetByIdHospital(hospitalId);
                 if (updatedHospital == null)
                 {
                     return NotFound();
@@ -86,7 +94,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             try
             {
-                await _hospitalRepository.DeleteAsync(hospitalId);
+                await _hospitalRepository.DeleteHospital(hospitalId);
                 return Ok("Hospital is deleted.");
             }
             catch (Exception ex)

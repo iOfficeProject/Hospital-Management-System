@@ -30,11 +30,21 @@ namespace Hospital_Appointment_Booking_System.Repositories
             return _mapper.Map<SpecializationDTO>(specialization);
         }
 
-        public async Task AddSpecialization(SpecializationDTO specializationDto)
+        public async Task<bool> AddSpecialization(SpecializationDTO specializationDto)
         {
+            var existingSpecialization = await _dbContext.Specializations.FirstOrDefaultAsync(s => s.SpecializationName == specializationDto.SpecializationName);
+
+            if (existingSpecialization != null)
+            {
+                return false;
+            }
+
             var specialization = _mapper.Map<Specialization>(specializationDto);
             _dbContext.Specializations.Add(specialization);
+
             await _dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task UpdateSpecialization(SpecializationDTO specializationDto)

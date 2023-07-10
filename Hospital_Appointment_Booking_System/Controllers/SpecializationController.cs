@@ -35,8 +35,20 @@ namespace Hospital_Appointment_Booking_System.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSpecialization(SpecializationDTO specializationDto)
         {
-            await _specializationRepository.AddSpecialization(specializationDto);
-            return Ok();
+            try
+            {
+                bool specializationAdded = await _specializationRepository.AddSpecialization(specializationDto);
+                if (!specializationAdded)
+                {
+                    return Conflict("Specialization name already exists.");
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while adding the specialization.");
+            }
         }
 
         [HttpPut("{id}")]

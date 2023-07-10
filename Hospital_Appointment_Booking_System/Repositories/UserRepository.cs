@@ -16,15 +16,32 @@ namespace Hospital_Appointment_Booking_System.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task AddUser(User user)
+        public async Task<bool> AddUser(User user)
         {
+            var existingUserWithEmail = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+            if (existingUserWithEmail != null)
+            {
+                return false; // Return false to indicate duplicate email
+            }
+
+            // Check for existing mobile number
+            var existingUserWithMobileNumber = await _dbContext.Users.FirstOrDefaultAsync(u => u.MobileNumber == user.MobileNumber);
+            if (existingUserWithMobileNumber != null)
+            {
+                return false; // Return false to indicate duplicate mobile number
+            }
+
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
+            return true;
         }
 
-        public async Task<List<User>> GetAllUser()
+        public async Task<List<User>> GetAllUser(RoleDTO role)
         {
-            return await _dbContext.Set<User>().ToListAsync();
+            List<User> users = await _dbContext.Users
+         .Where(u => u.Role.RoleName == "User")
+        .ToListAsync();
+            return users;
         }
 
         public async Task<User> GetUserById(int userId)
