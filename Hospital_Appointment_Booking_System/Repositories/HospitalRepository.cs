@@ -14,23 +14,30 @@ namespace Hospital_Appointment_Booking_System.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Hospital>> GetAllAsync()
+        public async Task<IEnumerable<Hospital>> GetAllHospital()
         {
             return await _context.Hospitals.ToListAsync();
         }
 
-        public async Task<Hospital> GetByIdAsync(int hospitalId)
+        public async Task<Hospital> GetByIdHospital(int hospitalId)
         {
             return await _context.Hospitals.FindAsync(hospitalId);
         }
 
-        public async Task AddAsync(Hospital hospital)
+        public async Task<bool> AddHospital(Hospital hospital)
         {
-            await _context.Hospitals.AddAsync(hospital);
+            var existingHospital = await _context.Hospitals.FirstOrDefaultAsync(h => h.HospitalName == hospital.HospitalName);
+            if (existingHospital != null)
+            {
+                return false; 
+            }
+            _context.Hospitals.Add(hospital);
             await _context.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task UpdateAsync(int hospitalId, Hospital hospital)
+        public async Task UpdateHospital(int hospitalId, Hospital hospital)
         {
             var existingHospital = await _context.Hospitals.FindAsync(hospitalId);
             if (existingHospital != null)
@@ -42,7 +49,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
             }
         }
 
-        public async Task DeleteAsync(int hospitalId)
+        public async Task DeleteHospital(int hospitalId)
         {
             var hospital = await _context.Hospitals.FindAsync(hospitalId);
             if (hospital != null)

@@ -22,28 +22,17 @@ namespace Hospital_Appointment_Booking_System.Controllers
             _IUserRepository = iUserRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<User>>> GetAllUsers()
+        [HttpGet("GetUserList")]
+        public async Task<ActionResult<List<User>>> GetUsers(RoleDTO roledto)
         {
-            var users = await _IUserRepository.GetAllUser();
-            if (users != null)
+            try
             {
-                var records = users.Select(u => new UserDTO
-                {
-                    UserId = u.UserId,
-                    Name = u.Name,
-                    Email = u.Email,
-                    Password = u.Password,
-                    MobileNumber = (long)u.MobileNumber,
-                    RoleId = u.RoleId,
-                    SpecializationId = u.SpecializationId,
-                    HospitalId = u.HospitalId
-                }).ToList();
-                return Ok(records);
+                List<User> users = await _IUserRepository.GetAllUser(roledto);
+                return Ok(users);
             }
-            else
+            catch (Exception ex)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving Users.");
             }
         }
 
@@ -65,7 +54,13 @@ namespace Hospital_Appointment_Booking_System.Controllers
                     SpecializationId = userDto.SpecializationId,
                     HospitalId = userDto.HospitalId
                 };
-                await _IUserRepository.AddUser(user);
+                
+                bool userCreated = await _IUserRepository.AddUser(user);
+                if (!userCreated)
+                {
+                    return Conflict("Email or mobile number already exists.");
+                }
+
                 return Ok(user);
             }
             catch
