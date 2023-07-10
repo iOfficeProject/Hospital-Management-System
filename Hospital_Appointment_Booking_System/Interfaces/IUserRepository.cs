@@ -11,6 +11,8 @@ namespace Hospital_Appointment_Booking_System.Interfaces
         Task UpdateUser(User user);
         Task DeleteUser(int userId);
         Task<User> GetUserById(int userId);
+        Task<List<User>> GetAllUsersWithRole();
+     
 
     }
 }

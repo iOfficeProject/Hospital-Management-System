@@ -1,12 +1,12 @@
 ﻿using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
+using Hospital_Appointment_Booking_System.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-
-
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
@@ -23,18 +23,18 @@ namespace Hospital_Appointment_Booking_System.Controllers
         }
 
         [HttpGet("GetUserList")]
-        public async Task<ActionResult<List<User>>> GetUsers(RoleDTO roledto)
-        {
-            try
-            {
-                List<User> users = await _IUserRepository.GetAllUser(roledto);
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving Users.");
-            }
-        }
+        //public async Task<ActionResult<List<User>>> GetUsers(RoleDTO roledto)
+        //{
+        //    try
+        //    {
+        //        List<User> users = await _IUserRepository.GetAllUser(roledto);
+        //        return Ok(users);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving Users.");
+        //    }
+        //}
 
 
 
@@ -70,20 +70,20 @@ namespace Hospital_Appointment_Booking_System.Controllers
         }
 
 
-        [HttpGet("GetDoctorList")]
-        [Authorize]
-        public async Task<ActionResult<List<User>>> GetDoctors(RoleDTO roledto)
-        {
-            try
-            {
-                List<User> doctors = await _IUserRepository.GetDoctors(roledto);
-                return Ok(doctors);
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving Doctors.");
-            }
-        }
+        //[HttpGet("GetDoctorList")]
+        //[Authorize]
+        //public async Task<ActionResult<List<User>>> GetDoctors(RoleDTO roledto)
+        //{
+        //    try
+        //    {
+        //        List<User> doctors = await _IUserRepository.GetDoctors(roledto);
+        //        return Ok(doctors);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving Doctors.");
+        //    }
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUserById(int id)
@@ -154,5 +154,22 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the user.");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _IUserRepository.GetAllUsersWithRole();
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 32 // Optional: Set the maximum depth if needed
+            };
+
+            var json = JsonSerializer.Serialize(users, options);
+
+            return Content(json, "application/json");
+        }      
+
     }
 }

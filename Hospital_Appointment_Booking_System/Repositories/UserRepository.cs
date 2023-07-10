@@ -86,5 +86,18 @@ namespace Hospital_Appointment_Booking_System.Repositories
         .ToListAsync();
             return doctors;
         }
+
+        public async Task<List<User>> GetAllUsersWithRole()
+        {
+            List<User> users = await _dbContext.Users
+                .Include(u => u.Role)
+                .AsSplitQuery()
+                .ToListAsync();
+
+            return users;
+        }
+       
+
+
     }
 }
