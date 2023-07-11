@@ -5,14 +5,13 @@ namespace Hospital_Appointment_Booking_System.Interfaces
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAllUser(RoleDTO roledto);
-        Task<bool> AddUser(User user);
-        Task<List<User>> GetDoctors(RoleDTO roledto);
+        Task<bool> AddUser(User user);        
         Task UpdateUser(User user);
         Task DeleteUser(int userId);
         Task<User> GetUserById(int userId);
-        Task<List<User>> GetAllUsersWithRole();
-     
+        Task<List<UserDTO>> GetAllUsers();
+        Task<List<UserDTO>> GetUsersByRoleId(int roleId);
+
 
     }
 }
