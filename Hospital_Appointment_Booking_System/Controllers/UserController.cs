@@ -22,20 +22,6 @@ namespace Hospital_Appointment_Booking_System.Controllers
             _IUserRepository = iUserRepository;
         }
 
-        [HttpGet("GetUserList")]
-        //public async Task<ActionResult<List<User>>> GetUsers(RoleDTO roledto)
-        //{
-        //    try
-        //    {
-        //        List<User> users = await _IUserRepository.GetAllUser(roledto);
-        //        return Ok(users);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving Users.");
-        //    }
-        //}
-
 
 
 
@@ -54,7 +40,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                     SpecializationId = userDto.SpecializationId,
                     HospitalId = userDto.HospitalId
                 };
-                
+
                 bool userCreated = await _IUserRepository.AddUser(user);
                 if (!userCreated)
                 {
@@ -70,20 +56,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
         }
 
 
-        //[HttpGet("GetDoctorList")]
-        //[Authorize]
-        //public async Task<ActionResult<List<User>>> GetDoctors(RoleDTO roledto)
-        //{
-        //    try
-        //    {
-        //        List<User> doctors = await _IUserRepository.GetDoctors(roledto);
-        //        return Ok(doctors);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving Doctors.");
-        //    }
-        //}
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUserById(int id)
@@ -112,64 +85,64 @@ namespace Hospital_Appointment_Booking_System.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, UserDTO updatedUserDto)
-        {
-            var existingUser = await _IUserRepository.GetUserById(id);
-
-            if (existingUser == null)
+            public async Task<IActionResult> UpdateUser(int id, UserDTO updatedUserDto)
             {
-                return NotFound();
+                var existingUser = await _IUserRepository.GetUserById(id);
+
+                if (existingUser == null)
+                {
+                    return NotFound();
+                }
+
+                existingUser.Name = updatedUserDto.Name;
+                existingUser.Email = updatedUserDto.Email;
+                existingUser.Password = updatedUserDto.Password;
+                existingUser.MobileNumber = updatedUserDto.MobileNumber;
+                existingUser.RoleId = updatedUserDto.RoleId;
+                existingUser.SpecializationId = updatedUserDto.SpecializationId;
+                existingUser.HospitalId = updatedUserDto.HospitalId;
+
+                try
+                {
+                    await _IUserRepository.UpdateUser(existingUser);
+                    return Ok();
+                }
+                catch
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the user.");
+                }
             }
 
-            existingUser.Name = updatedUserDto.Name;
-            existingUser.Email = updatedUserDto.Email;
-            existingUser.Password = updatedUserDto.Password;
-            existingUser.MobileNumber = updatedUserDto.MobileNumber;
-            existingUser.RoleId = updatedUserDto.RoleId;
-            existingUser.SpecializationId = updatedUserDto.SpecializationId;
-            existingUser.HospitalId = updatedUserDto.HospitalId;
 
-            try
+            [HttpDelete("{id}")]
+            public async Task<IActionResult> DeleteUser(int id)
             {
-                await _IUserRepository.UpdateUser(existingUser);
-                return Ok();
+                try
+                {
+                    await _IUserRepository.DeleteUser(id);
+                    return Ok();
+                }
+                catch
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the user.");
+                }
             }
-            catch
+
+            [HttpGet]
+            public async Task<ActionResult<List<UserDTO>>> GetUsers()
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the user.");
+                List<UserDTO> userDTOs = await _IUserRepository.GetAllUsers();
+                return Ok(userDTOs);
             }
-        }
 
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            try
+            [HttpGet("User/{roleId}")]
+            public async Task<ActionResult<List<UserDTO>>> GetUsersByRoleId(int roleId)
             {
-                await _IUserRepository.DeleteUser(id);
-                return Ok();
+                List<UserDTO> userDTOs = await _IUserRepository.GetUsersByRoleId(roleId);
+                return Ok(userDTOs);
             }
-            catch
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the user.");
-            }
-        }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var users = await _IUserRepository.GetAllUsersWithRole();
-
-            var options = new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                MaxDepth = 32 // Optional: Set the maximum depth if needed
-            };
-
-            var json = JsonSerializer.Serialize(users, options);
-
-            return Content(json, "application/json");
-        }      
-
+        
     }
 }

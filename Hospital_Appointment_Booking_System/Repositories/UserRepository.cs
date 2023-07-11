@@ -1,6 +1,8 @@
-﻿using Hospital_Appointment_Booking_System.DTO;
+﻿using AutoMapper;
+using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -10,10 +12,12 @@ namespace Hospital_Appointment_Booking_System.Repositories
     public class UserRepository : IUserRepository
     {
         readonly Master_Hospital_ManagementContext _dbContext = new();
+        private readonly IMapper _mapper;
 
-        public UserRepository(Master_Hospital_ManagementContext dbContext)
+        public UserRepository(Master_Hospital_ManagementContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<bool> AddUser(User user)
@@ -36,13 +40,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
             return true;
         }
 
-        public async Task<List<User>> GetAllUser(RoleDTO role)
-        {
-            List<User> users = await _dbContext.Users
-         .Where(u => u.Role.RoleName == "User")
-        .ToListAsync();
-            return users;
-        }
+        
 
         public async Task<User> GetUserById(int userId)
         {
@@ -78,25 +76,25 @@ namespace Hospital_Appointment_Booking_System.Repositories
             }
         }
 
-
-        public async Task<List<User>> GetDoctors(RoleDTO role)
+        public async Task<List<UserDTO>> GetAllUsers()
         {
-            List<User> doctors = await _dbContext.Users
-         .Where(u => u.Role.RoleName == "Doctor")
-        .ToListAsync();
-            return doctors;
+
+            var users = await _dbContext.Users
+            .Include(u => u.Role)
+            .ToListAsync();
+            return _mapper.Map<List<UserDTO>>(users);
         }
 
-        public async Task<List<User>> GetAllUsersWithRole()
+        public async Task<List<UserDTO>> GetUsersByRoleId(int roleId)
         {
             List<User> users = await _dbContext.Users
-                .Include(u => u.Role)
-                .AsSplitQuery()
+                .Where(u => u.RoleId == roleId)
                 .ToListAsync();
-
-            return users;
+            List<UserDTO> userDTOs = _mapper.Map<List<UserDTO>>(users);
+            return userDTOs;
         }
-       
+
+
 
 
     }
