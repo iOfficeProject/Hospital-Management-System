@@ -8,6 +8,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'  # Update with your desired build configuration
+  imageName: hospital_appointment_booking_system:latest
 
 steps:
  - task: Docker@2
