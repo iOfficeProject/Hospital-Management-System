@@ -10,25 +10,9 @@ variables:
   buildConfiguration: 'Release'  # Update with your desired build configuration
 
 steps:
-- task: UseDotNet@2
-  inputs:
-    version: '6.x'
-    includePreviewVersions: true
-
-- script: dotnet restore
-  displayName: 'Restore NuGet packages'
-
-- script: dotnet build --configuration $(buildConfiguration) --no-restore
-  displayName: 'Build solution'
-
-- script: dotnet test --configuration $(buildConfiguration) --no-build --collect:"XPlat Code Coverage"
-  displayName: 'Run tests'
-
-- script: dotnet publish --configuration $(buildConfiguration) --no-build --output $(Build.ArtifactStagingDirectory)
-  displayName: 'Publish artifacts'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'drop'
-    publishLocation: 'Container'
+ - task: Docker@2
+   displayName: Build an image
+   inputs:
+     repository: $(imageName)
+     command: build
+     Dockerfile: Dockerfile
