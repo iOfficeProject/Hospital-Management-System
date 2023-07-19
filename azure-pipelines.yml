@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - main  # Update with your branch name
+      - master  # Update with your branch name
 
 pool:
   vmImage: 'ubuntu-latest'
