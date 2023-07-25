@@ -52,30 +52,29 @@ namespace Hospital_Appointment_Booking_System.Controllers
         public async Task<ActionResult<Hospital>> CreateHospital(Hospital hospital)
         {
             try
-            {
-             
+            {            
                 bool hospitalCreated = await _hospitalRepository.AddHospital(hospital);
                 if (!hospitalCreated)
                 {
                     return Conflict("Hospital name already exists."); 
                 }
-
                 return Ok(hospital);
-
-                //return CreatedAtAction(nameof(GetHospital), new { hospitalId = hospital.HospitalId }, hospital);
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the hospital.");
             }
-        }
-
+        }      
         [HttpPut("{hospitalId}")]
         public async Task<ActionResult<Hospital>> UpdateHospital(int hospitalId, Hospital hospital)
         {
             try
             {
-                await _hospitalRepository.UpdateHospital(hospitalId, hospital);
+                var isHospitalUpdated = await _hospitalRepository.UpdateHospital(hospitalId, hospital);
+                if (!isHospitalUpdated)
+                {
+                    return Conflict("Hospital name already exists.");
+                }
                 var updatedHospital = await _hospitalRepository.GetByIdHospital(hospitalId);
                 if (updatedHospital == null)
                 {
@@ -88,6 +87,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the hospital.");
             }
         }
+
 
         [HttpDelete("{hospitalId}")]
         public async Task<IActionResult> DeleteHospital(int hospitalId)

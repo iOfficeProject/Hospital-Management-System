@@ -1,5 +1,7 @@
 ﻿using Hospital_Appointment_Booking_System.DTO;
+using Hospital_Appointment_Booking_System.Helpers;
 using Hospital_Appointment_Booking_System.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,13 +10,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-
 namespace Hospital_Appointment_Booking_System.Controllers
 {
     [EnableCors("MyPolicy")]
     [Route("api/login")]
     [ApiController]
-    public class LoginController: ControllerBase
+    public class LoginController : ControllerBase
     {
         public IConfiguration _configuration;
         private readonly Master_Hospital_ManagementContext _context;
@@ -30,21 +31,28 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             if (_userData != null && _userData.Email != null && _userData.Password != null)
             {
-                var user = await GetUser(_userData.Email, _userData.Password);
-                
+                var user = await GetUser(_userData.Email);
+
                 if (user != null)
                 {
-                    //find roleName accordingly
+                    // Decrypt the stored encrypted password
+                    bool isPasswordCorrect = PasswordHasher.DecryptPassword(user.Password, _userData.Password);
+
+                    if (!isPasswordCorrect)
+                    {
+                        return BadRequest("Invalid credentials");
+                    }
+
+                    // Find roleName accordingly
                     var role = await _context.Roles.FindAsync(user.RoleId);
                     var roleName = role?.RoleName;
 
-          
                     var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                         new Claim("Password", user.Password),
-                        new Claim("Email", user.Email)                        
+                        new Claim("Email", user.Email)
                     };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -56,8 +64,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                         expires: DateTime.UtcNow.AddMinutes(5),
                         signingCredentials: signIn);
 
-                    return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(token),roleName});
-
+                    return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(token), roleName });
                 }
                 else
                 {
@@ -70,9 +77,9 @@ namespace Hospital_Appointment_Booking_System.Controllers
             }
         }
 
-        private async Task<User> GetUser(string email, string password)
+        private async Task<User> GetUser(string email)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

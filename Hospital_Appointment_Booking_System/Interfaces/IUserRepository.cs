@@ -11,6 +11,7 @@ namespace Hospital_Appointment_Booking_System.Interfaces
         Task<User> GetUserById(int userId);
         Task<List<UserDTO>> GetAllUsers();
         Task<List<UserDTO>> GetUsersByRoleId(int roleId);
+        Task<List<UserDTO>> GetUsersBySpecializationId(int specializationId);
 
 
     }

@@ -37,16 +37,25 @@ namespace Hospital_Appointment_Booking_System.Repositories
             return true;
         }
 
-        public async Task UpdateHospital(int hospitalId, Hospital hospital)
+        public async Task<bool> UpdateHospital(int hospitalId, Hospital hospital)
         {
-            var existingHospital = await _context.Hospitals.FindAsync(hospitalId);
-            if (existingHospital != null)
+            var existingHospital = await _context.Hospitals.FirstOrDefaultAsync(h => h.HospitalId == hospitalId);
+            if (existingHospital == null)
             {
-                existingHospital.HospitalName = hospital.HospitalName;
-                existingHospital.Location = hospital.Location;
-
-                await _context.SaveChangesAsync();
+                return false;
             }
+            var anotherHospitalWithSameName = await _context.Hospitals.FirstOrDefaultAsync(h => h.HospitalName == hospital.HospitalName && h.HospitalId != hospitalId);
+            if (anotherHospitalWithSameName != null)
+            {
+                return false;
+            }
+
+            existingHospital.HospitalName = hospital.HospitalName;
+            existingHospital.Location = hospital.Location;
+
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task DeleteHospital(int hospitalId)
