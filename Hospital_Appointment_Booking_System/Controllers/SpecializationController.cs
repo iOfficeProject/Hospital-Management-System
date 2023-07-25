@@ -21,6 +21,18 @@ namespace Hospital_Appointment_Booking_System.Controllers
             var specializations = await _specializationRepository.GetAllSpecializations();
             return Ok(specializations);
         }
+        [HttpGet("specializedHospitals/{hospitalId}")]
+        public async Task<IActionResult> GetSpecializationsByHospitalId(int hospitalId)
+        {
+            var specializations = await _specializationRepository.GetSpecializationsByHospitalId(hospitalId);
+
+            if (specializations == null || !specializations.Any())
+            {
+                return NotFound(); // Return 404 Not Found if no specializations are found for the given hospitalId
+            }
+
+            return Ok(specializations);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetSpecializationById(int id)
@@ -42,7 +54,6 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 {
                     return Conflict("Specialization name already exists.");
                 }
-
                 return Ok();
             }
             catch (Exception ex)

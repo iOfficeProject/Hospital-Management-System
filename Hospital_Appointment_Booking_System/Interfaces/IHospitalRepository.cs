@@ -8,7 +8,7 @@ namespace Hospital_Appointment_Booking_System.Interfaces
         Task<IEnumerable<Hospital>> GetAllHospital();
         Task<Hospital> GetByIdHospital (int hospitalId);
         Task<bool> AddHospital(Hospital hospital);
-        Task UpdateHospital(int hospitalId, Hospital hospital);
+        Task<bool> UpdateHospital(int hospitalId, Hospital hospital);
         Task DeleteHospital(int hospitalId);
     }
 }

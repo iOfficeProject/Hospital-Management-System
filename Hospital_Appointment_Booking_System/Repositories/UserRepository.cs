@@ -94,6 +94,15 @@ namespace Hospital_Appointment_Booking_System.Repositories
             return userDTOs;
         }
 
+        public async Task<List<UserDTO>> GetUsersBySpecializationId(int specializationId)
+        {
+            var users = await _dbContext.Users
+                .Include(u => u.Role)
+                .Where(u => u.SpecializationId == specializationId)
+                .ToListAsync();
+
+            return _mapper.Map<List<UserDTO>>(users);
+        }
 
 
 

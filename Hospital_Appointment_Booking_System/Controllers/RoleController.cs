@@ -19,16 +19,23 @@ namespace Hospital_Appointment_Booking_System.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddRole(RoleDTO roledto)
+        public async Task<ActionResult<Role>> AddRole(Role role)
         {
-            var role = new Role
+            try
             {
-                RoleName = roledto.RoleName,           
-            };
 
-            await _IRoleRepository.AddRole(role);
+                bool roleCreated = await _IRoleRepository.AddRole(role);
+                if (!roleCreated)
+                {
+                    return Conflict("Role already exists.");
+                }
 
-            return Ok(role);
+                return Ok(role);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the role.");
+            }
         }
 
         [HttpDelete("{roleId}")]

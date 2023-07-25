@@ -1,4 +1,5 @@
 ﻿using Hospital_Appointment_Booking_System.DTO;
+using Hospital_Appointment_Booking_System.Helpers;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
 using Hospital_Appointment_Booking_System.Repositories;
@@ -22,9 +23,6 @@ namespace Hospital_Appointment_Booking_System.Controllers
             _IUserRepository = iUserRepository;
         }
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> CreateUser(UserDTO userDto)
         {
@@ -34,7 +32,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 {
                     Name = userDto.Name,
                     Email = userDto.Email,
-                    Password = userDto.Password,
+                    Password = PasswordHasher.EncryptPassword(userDto.Password),
                     MobileNumber = userDto.MobileNumber,
                     RoleId = userDto.RoleId,
                     SpecializationId = userDto.SpecializationId,
@@ -96,7 +94,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
 
                 existingUser.Name = updatedUserDto.Name;
                 existingUser.Email = updatedUserDto.Email;
-                existingUser.Password = updatedUserDto.Password;
+                existingUser.Password = PasswordHasher.EncryptPassword(updatedUserDto.Password);
                 existingUser.MobileNumber = updatedUserDto.MobileNumber;
                 existingUser.RoleId = updatedUserDto.RoleId;
                 existingUser.SpecializationId = updatedUserDto.SpecializationId;
@@ -143,6 +141,19 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 return Ok(userDTOs);
             }
 
-        
+        [HttpGet("specializedDoctors/{specializationId}")]
+        public async Task<ActionResult<List<UserDTO>>> GetUsersBySpecializationId(int specializationId)
+        {
+            var users = await _IUserRepository.GetUsersBySpecializationId(specializationId);
+
+            if (users == null || !users.Any())
+            {
+                return NotFound(); // Return 404 Not Found if no users are found for the given specializationId
+            }
+
+            return Ok(users);
+        }
+
+
     }
 }

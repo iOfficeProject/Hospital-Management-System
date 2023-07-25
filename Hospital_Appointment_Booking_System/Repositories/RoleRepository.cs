@@ -13,10 +13,18 @@ namespace Hospital_Appointment_Booking_System.Repositories
             _dbContext = dbContext;
 
         }
-        public async Task AddRole(Role role)
+        public async Task<bool> AddRole(Role role)
         {
+            var existingRole = await _dbContext.Roles.FirstOrDefaultAsync(r => r.RoleName == role.RoleName);
+            if (existingRole != null)
+            {
+                return false;
+            }
             _dbContext.Roles.Add(role);
             await _dbContext.SaveChangesAsync();
+
+            return true;
+
         }
 
         public async Task DeleteRole(int roleId)
