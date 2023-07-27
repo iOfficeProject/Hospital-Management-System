@@ -1,9 +1,11 @@
 ﻿using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/specializations")]
     public class SpecializationController : ControllerBase
@@ -28,7 +30,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
 
             if (specializations == null || !specializations.Any())
             {
-                return NotFound(); // Return 404 Not Found if no specializations are found for the given hospitalId
+                return NotFound();
             }
 
             return Ok(specializations);
@@ -56,7 +58,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 }
                 return Ok();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while adding the specialization.");
             }

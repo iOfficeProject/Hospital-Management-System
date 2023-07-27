@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
-    // [Authorize]
+    [Authorize]
     [EnableCors("MyPolicy")]
     [Route("api/users")]
     [ApiController]
@@ -53,32 +53,36 @@ namespace Hospital_Appointment_Booking_System.Controllers
             }
         }
 
-
-
-
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> GetUserById(int id)
         {
-            var user = await _IUserRepository.GetUserById(id);
-
-            if (user == null)
+            try
             {
-                return NotFound();
+                var user = await _IUserRepository.GetUserById(id);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                var userDto = new UserDTO
+                {
+                    UserId = user.UserId,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Password = user.Password,
+                    MobileNumber = (long)user.MobileNumber,
+                    RoleId = user.RoleId,
+                    SpecializationId = user.SpecializationId,
+                    HospitalId = user.HospitalId
+                };
+
+                return Ok(userDto);
             }
-
-            var userDto = new UserDTO
+            catch
             {
-                UserId = user.UserId,
-                Name = user.Name,
-                Email = user.Email,
-                Password = user.Password,
-                MobileNumber = (long)user.MobileNumber,
-                RoleId = user.RoleId,
-                SpecializationId = user.SpecializationId,
-                HospitalId = user.HospitalId
-            };
-
-            return Ok(userDto);
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting user.");
+            }
         }
 
 
@@ -86,6 +90,8 @@ namespace Hospital_Appointment_Booking_System.Controllers
             public async Task<IActionResult> UpdateUser(int id, UserDTO updatedUserDto)
             {
                 var existingUser = await _IUserRepository.GetUserById(id);
+            try 
+            { 
 
                 if (existingUser == null)
                 {
@@ -100,15 +106,18 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 existingUser.SpecializationId = updatedUserDto.SpecializationId;
                 existingUser.HospitalId = updatedUserDto.HospitalId;
 
-                try
+            var updateResult = await _IUserRepository.UpdateUser(existingUser);
+             if (!updateResult)
                 {
-                    await _IUserRepository.UpdateUser(existingUser);
-                    return Ok();
+                    return Conflict("Email or mobile number already exists.");
                 }
-                catch
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the user.");
-                }
+
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while adding user.");
+            }
             }
 
 
@@ -129,31 +138,50 @@ namespace Hospital_Appointment_Booking_System.Controllers
             [HttpGet]
             public async Task<ActionResult<List<UserDTO>>> GetUsers()
             {
+            try
+            {
                 List<UserDTO> userDTOs = await _IUserRepository.GetAllUsers();
                 return Ok(userDTOs);
             }
-
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting users.");
+            }
+            }
 
             [HttpGet("User/{roleId}")]
             public async Task<ActionResult<List<UserDTO>>> GetUsersByRoleId(int roleId)
             {
+            try
+            {
+
                 List<UserDTO> userDTOs = await _IUserRepository.GetUsersByRoleId(roleId);
                 return Ok(userDTOs);
             }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting the user.");
+            }
+        }
 
         [HttpGet("specializedDoctors/{specializationId}")]
         public async Task<ActionResult<List<UserDTO>>> GetUsersBySpecializationId(int specializationId)
         {
-            var users = await _IUserRepository.GetUsersBySpecializationId(specializationId);
-
-            if (users == null || !users.Any())
+            try
             {
-                return NotFound(); // Return 404 Not Found if no users are found for the given specializationId
+                var users = await _IUserRepository.GetUsersBySpecializationId(specializationId);
+
+                if (users == null || !users.Any())
+                {
+                    return NotFound();
+                }
+
+                return Ok(users);
             }
-
-            return Ok(users);
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting specialized user.");
+            }
         }
-
-
     }
 }
