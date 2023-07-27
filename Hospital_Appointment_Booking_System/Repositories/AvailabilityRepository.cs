@@ -14,29 +14,29 @@ namespace Hospital_Appointment_Booking_System.Repositories
             _dbContext = dbContext;
 
         }
-        public async Task<Availability> GetById(int id)
+        public async Task<Availability> GetAvailabilityById(int id)
         {
             return await _dbContext.Availabilities.FindAsync(id);
         }
 
-        public async Task<List<Availability>> GetAll()
+        public async Task<List<Availability>> GetAllAvailability()
         {
             return await _dbContext.Availabilities.ToListAsync();
         }
 
-        public async Task Add(Availability availability)
+        public async Task AddAvailability(Availability availability)
         {
             _dbContext.Availabilities.Add(availability);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Update(Availability availability)
+        public async Task UpdateAvailability(Availability availability)
         {
             _dbContext.Entry(availability).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(Availability availability)
+        public async Task DeleteAvailability(Availability availability)
         {
             _dbContext.Availabilities.Remove(availability);
             await _dbContext.SaveChangesAsync();

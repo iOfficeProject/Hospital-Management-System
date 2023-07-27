@@ -18,19 +18,17 @@ namespace Hospital_Appointment_Booking_System.Controllers
             _availabilityRepository = availabilityRepository;
         }
 
-        // GET: api/availability
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAvailability()
         {
-            var availabilities = await _availabilityRepository.GetAll();
+            var availabilities = await _availabilityRepository.GetAllAvailability();
             return Ok(availabilities);
         }
 
-        // GET: api/availability/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetAvailabilityById(int id)
         {
-            var availability = await _availabilityRepository.GetById(id);
+            var availability = await _availabilityRepository.GetAvailabilityById(id);
             if (availability == null)
             {
                 return NotFound();
@@ -39,7 +37,6 @@ namespace Hospital_Appointment_Booking_System.Controllers
             return Ok(availability);
         }
 
-        // POST: api/availability
         [HttpPost]
         public async Task<IActionResult> AddAvailability(AvailabilityDTO availabilityDTO)
         {
@@ -53,21 +50,20 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 UserId = availabilityDTO.UserId
             };
 
-            await _availabilityRepository.Add(availability);
+            await _availabilityRepository.AddAvailability(availability);
 
             return Ok(availability);
         }
 
-        // PUT: api/availability/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] AvailabilityDTO availabilityDTO)
+        public async Task<IActionResult> UpdateAvailability(int id, [FromBody] AvailabilityDTO availabilityDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var availability = await _availabilityRepository.GetById(id);
+            var availability = await _availabilityRepository.GetAvailabilityById(id);
             if (availability == null)
             {
                 return NotFound();
@@ -79,22 +75,21 @@ namespace Hospital_Appointment_Booking_System.Controllers
             availability.EndTime = availabilityDTO.EndTime;
             availability.UserId = availabilityDTO.UserId;
 
-            await _availabilityRepository.Update(availability);
+            await _availabilityRepository.UpdateAvailability(availability);
 
             return NoContent();
         }
 
-        // DELETE: api/availability/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAvailability(int id)
         {
-            var availability = await _availabilityRepository.GetById(id);
+            var availability = await _availabilityRepository.GetAvailabilityById(id);
             if (availability == null)
             {
                 return NotFound();
             }
 
-            await _availabilityRepository.Delete(availability);
+            await _availabilityRepository.DeleteAvailability(availability);
 
             return NoContent();
         }
