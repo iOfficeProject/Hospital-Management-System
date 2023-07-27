@@ -1,10 +1,12 @@
 ﻿using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class HospitalController : ControllerBase
@@ -24,7 +26,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 var hospitals = await _hospitalRepository.GetAllHospital();
                 return Ok(hospitals);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving hospitals.");
             }
@@ -42,7 +44,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 }
                 return Ok(hospital);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while retrieving the hospital.");
             }
@@ -60,7 +62,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 }
                 return Ok(hospital);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the hospital.");
             }
@@ -82,7 +84,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 }
                 return Ok(updatedHospital);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the hospital.");
             }
@@ -97,7 +99,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 await _hospitalRepository.DeleteHospital(hospitalId);
                 return Ok("Hospital is deleted.");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the hospital.");
             }

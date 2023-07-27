@@ -9,7 +9,6 @@
         public long MobileNumber { get; set; }
         public int? RoleId { get; set; }
         public RoleDTO? Role { get; set; }
-
         public int? SpecializationId { get; set; }
         public int? HospitalId { get; set; }
     }

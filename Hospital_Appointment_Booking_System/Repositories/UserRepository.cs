@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Hospital_Appointment_Booking_System.DTO;
+using Hospital_Appointment_Booking_System.Helpers;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -25,14 +26,13 @@ namespace Hospital_Appointment_Booking_System.Repositories
             var existingUserWithEmail = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
             if (existingUserWithEmail != null)
             {
-                return false; // Return false to indicate duplicate email
+                return false; 
             }
 
-            // Check for existing mobile number
             var existingUserWithMobileNumber = await _dbContext.Users.FirstOrDefaultAsync(u => u.MobileNumber == user.MobileNumber);
             if (existingUserWithMobileNumber != null)
             {
-                return false; // Return false to indicate duplicate mobile number
+                return false; 
             }
 
             _dbContext.Users.Add(user);
@@ -47,13 +47,23 @@ namespace Hospital_Appointment_Booking_System.Repositories
             return await _dbContext.Users.FindAsync(userId);
         }
 
-        public async Task UpdateUser(User updatedUser)
+        public async Task<bool> UpdateUser(User updatedUser)
         {
             var user = await _dbContext.Users.FindAsync(updatedUser.UserId);
-
+            
             if (user != null)
             {
-                // Update the relevant properties of the user
+                var existingUserWithEmail = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+                if (existingUserWithEmail != null)
+                {
+                    return false;
+                }
+
+                var existingUserWithMobileNumber = await _dbContext.Users.FirstOrDefaultAsync(u => u.MobileNumber == user.MobileNumber);
+                if (existingUserWithMobileNumber != null)
+                {
+                    return false;
+                }
                 user.Name = updatedUser.Name;
                 user.Email = updatedUser.Email;
                 user.Password = updatedUser.Password;
@@ -64,6 +74,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
 
                 await _dbContext.SaveChangesAsync();
             }
+            return false;
         }
 
         public async Task DeleteUser(int userId)
@@ -100,11 +111,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
                 .Include(u => u.Role)
                 .Where(u => u.SpecializationId == specializationId)
                 .ToListAsync();
-
             return _mapper.Map<List<UserDTO>>(users);
         }
-
-
-
     }
 }

@@ -1,11 +1,13 @@
 ﻿using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
+    [Authorize]
     [EnableCors("MyPolicy")]
     [Route("api/roles")]
     [ApiController]
@@ -32,7 +34,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
 
                 return Ok(role);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the role.");
             }
@@ -41,43 +43,64 @@ namespace Hospital_Appointment_Booking_System.Controllers
         [HttpDelete("{roleId}")]
         public async Task<IActionResult> DeleteRole(int roleId)
         {
-            await _IRoleRepository.DeleteRole(roleId);
-            return Ok(roleId);
+            try
+            {
+                await _IRoleRepository.DeleteRole(roleId);
+                return Ok(roleId);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the user.");
+            }
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Role>>> GetAllUsers()
+        public async Task<ActionResult<List<Role>>> GetAllRoles()
         {
-            var roles = await _IRoleRepository.GetAllRoles();
-            if (roles != null)
+            try
             {
-                var records = roles.Select(u => new RoleDTO
+                var roles = await _IRoleRepository.GetAllRoles();
+                if (roles != null)
                 {
-                    RoleId = u.RoleId,
-                    RoleName = u.RoleName
-                  
-                }).ToList();
-                /*var records = await _IHospitalRepository.GetAllUser();*/
-                return Ok(records);
+                    var records = roles.Select(u => new RoleDTO
+                    {
+                        RoleId = u.RoleId,
+                        RoleName = u.RoleName
+
+                    }).ToList();
+
+                    return Ok(records);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            else
+            catch
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting users.");
             }
         }
 
 
         [HttpGet("{roleId}")]
-        public async Task<IActionResult> GetUserById(int roleId)
+        public async Task<IActionResult> GetRoleById(int roleId)
         {
-            var role = await _IRoleRepository.GetRoleById(roleId);
-
-            if (role == null)
+            try
             {
-                return NotFound("Role not found");
-            }
+                var role = await _IRoleRepository.GetRoleById(roleId);
 
-            return Ok(role);
+                if (role == null)
+                {
+                    return NotFound("Role not found");
+                }
+
+                return Ok(role);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting the user.");
+            }
         }
 
     }

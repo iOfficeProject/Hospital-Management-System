@@ -35,7 +35,6 @@ namespace Hospital_Appointment_Booking_System.Controllers
 
                 if (user != null)
                 {
-                    // Decrypt the stored encrypted password
                     bool isPasswordCorrect = PasswordHasher.DecryptPassword(user.Password, _userData.Password);
 
                     if (!isPasswordCorrect)
@@ -43,7 +42,6 @@ namespace Hospital_Appointment_Booking_System.Controllers
                         return BadRequest("Invalid credentials");
                     }
 
-                    // Find roleName accordingly
                     var role = await _context.Roles.FindAsync(user.RoleId);
                     var roleName = role?.RoleName;
 

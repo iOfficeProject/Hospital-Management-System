@@ -1,9 +1,11 @@
 ﻿using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/Slots")]
     public class SlotController : Controller
