@@ -3,6 +3,8 @@ using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
@@ -21,78 +23,111 @@ namespace Hospital_Appointment_Booking_System.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAvailability()
         {
-            var availabilities = await _availabilityRepository.GetAllAvailability();
-            return Ok(availabilities);
+            try
+            {
+                var availabilities = await _availabilityRepository.GetAllAvailability();
+                return Ok(availabilities);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while fetching availability data.");
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAvailabilityById(int id)
         {
-            var availability = await _availabilityRepository.GetAvailabilityById(id);
-            if (availability == null)
+            try
             {
-                return NotFound();
-            }
+                var availability = await _availabilityRepository.GetAvailabilityById(id);
+                if (availability == null)
+                {
+                    return NotFound();
+                }
 
-            return Ok(availability);
+                return Ok(availability);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while fetching availability data by ID.");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AddAvailability(AvailabilityDTO availabilityDTO)
         {
-
-            var availability = new Availability
+            try
             {
-                IsAvailable = availabilityDTO.IsAvailable,
-                Date = availabilityDTO.Date,
-                StartTime = availabilityDTO.StartTime,
-                EndTime = availabilityDTO.EndTime,
-                UserId = availabilityDTO.UserId
-            };
+                var availability = new Availability
+                {
+                    IsAvailable = availabilityDTO.IsAvailable,
+                    Date = availabilityDTO.Date,
+                    StartTime = availabilityDTO.StartTime,
+                    EndTime = availabilityDTO.EndTime,
+                    UserId = availabilityDTO.UserId
+                };
 
-            await _availabilityRepository.AddAvailability(availability);
+                await _availabilityRepository.AddAvailability(availability);
 
-            return Ok(availability);
+                return Ok(availability);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while adding availability data.");
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAvailability(int id, [FromBody] AvailabilityDTO availabilityDTO)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
-            var availability = await _availabilityRepository.GetAvailabilityById(id);
-            if (availability == null)
+                var availability = await _availabilityRepository.GetAvailabilityById(id);
+                if (availability == null)
+                {
+                    return NotFound();
+                }
+
+                availability.IsAvailable = availabilityDTO.IsAvailable;
+                availability.Date = availabilityDTO.Date;
+                availability.StartTime = availabilityDTO.StartTime;
+                availability.EndTime = availabilityDTO.EndTime;
+                availability.UserId = availabilityDTO.UserId;
+
+                await _availabilityRepository.UpdateAvailability(availability);
+
+                return NoContent();
+            }
+            catch (Exception)
             {
-                return NotFound();
+                return StatusCode(500, "An error occurred while updating availability data.");
             }
-
-            availability.IsAvailable = availabilityDTO.IsAvailable;
-            availability.Date = availabilityDTO.Date;
-            availability.StartTime = availabilityDTO.StartTime;
-            availability.EndTime = availabilityDTO.EndTime;
-            availability.UserId = availabilityDTO.UserId;
-
-            await _availabilityRepository.UpdateAvailability(availability);
-
-            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAvailability(int id)
         {
-            var availability = await _availabilityRepository.GetAvailabilityById(id);
-            if (availability == null)
+            try
             {
-                return NotFound();
+                var availability = await _availabilityRepository.GetAvailabilityById(id);
+                if (availability == null)
+                {
+                    return NotFound();
+                }
+
+                await _availabilityRepository.DeleteAvailability(availability);
+
+                return NoContent();
             }
-
-            await _availabilityRepository.DeleteAvailability(availability);
-
-            return NoContent();
+            catch (Exception)
+            {
+                return StatusCode(500, "An error occurred while deleting availability data.");
+            }
         }
     }
-
 }
