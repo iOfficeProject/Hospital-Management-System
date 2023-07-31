@@ -9,11 +9,13 @@ namespace Hospital_Appointment_Booking_System.Models
     {
         public Master_Hospital_ManagementContext()
         {
+
         }
 
         public Master_Hospital_ManagementContext(DbContextOptions<Master_Hospital_ManagementContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<Appointment> Appointments { get; set; } = null!;
@@ -27,11 +29,7 @@ namespace Hospital_Appointment_Booking_System.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=JULIK-VD3;Initial Catalog=Master_Hospital_Management;User ID=sa;Password=cybage@123456;Encrypt=False");
-            }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
