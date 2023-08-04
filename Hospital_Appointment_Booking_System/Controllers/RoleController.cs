@@ -1,9 +1,14 @@
-﻿using Hospital_Appointment_Booking_System.DTO;
+﻿using AutoMapper;
+using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
@@ -14,25 +19,27 @@ namespace Hospital_Appointment_Booking_System.Controllers
     public class RoleController : ControllerBase
     {
         private readonly IRoleRepository _IRoleRepository;
-        public RoleController(IRoleRepository iRoleRepository)
+        private readonly IMapper _mapper;
+
+        public RoleController(IRoleRepository iRoleRepository, IMapper mapper)
         {
             _IRoleRepository = iRoleRepository;
+            _mapper = mapper;
         }
 
-
         [HttpPost]
-        public async Task<ActionResult<Role>> AddRole(Role role)
+        public async Task<ActionResult<RoleDTO>> AddRole(RoleDTO roleDTO)
         {
             try
             {
-
+                var role = _mapper.Map<Role>(roleDTO);
                 bool roleCreated = await _IRoleRepository.AddRole(role);
                 if (!roleCreated)
                 {
                     return Conflict("Role already exists.");
                 }
 
-                return Ok(role);
+                return Ok(roleDTO);
             }
             catch (Exception)
             {
@@ -55,21 +62,15 @@ namespace Hospital_Appointment_Booking_System.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Role>>> GetAllRoles()
+        public async Task<ActionResult<List<RoleDTO>>> GetAllRoles()
         {
             try
             {
                 var roles = await _IRoleRepository.GetAllRoles();
                 if (roles != null)
                 {
-                    var records = roles.Select(u => new RoleDTO
-                    {
-                        RoleId = u.RoleId,
-                        RoleName = u.RoleName
-
-                    }).ToList();
-
-                    return Ok(records);
+                    var roleDTOs = _mapper.Map<List<RoleDTO>>(roles);
+                    return Ok(roleDTOs);
                 }
                 else
                 {
@@ -81,7 +82,6 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting users.");
             }
         }
-
 
         [HttpGet("{roleId}")]
         public async Task<IActionResult> GetRoleById(int roleId)
@@ -95,13 +95,13 @@ namespace Hospital_Appointment_Booking_System.Controllers
                     return NotFound("Role not found");
                 }
 
-                return Ok(role);
+                var roleDTO = _mapper.Map<RoleDTO>(role);
+                return Ok(roleDTO);
             }
             catch
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting the user.");
             }
         }
-
     }
 }

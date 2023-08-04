@@ -1,5 +1,5 @@
 create table Hospital(
-hospital_id int PRIMARY KEY IDENTITY,
-hospital_name varchar(255) NOT NULL,
-location varchar(255) NOT NULL
+Hospital_Id int PRIMARY KEY IDENTITY,
+Hospital_Name varchar(255) NOT NULL,
+Location varchar(255) NOT NULL
 )

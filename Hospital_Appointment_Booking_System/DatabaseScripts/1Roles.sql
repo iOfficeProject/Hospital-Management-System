@@ -1,4 +1,4 @@
 create table Roles(
-role_id int PRIMARY KEY IDENTITY,
-role_name varchar(255)
+Role_Id int PRIMARY KEY IDENTITY,
+Role_Name varchar(255)
 )

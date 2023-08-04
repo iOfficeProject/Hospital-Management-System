@@ -210,7 +210,7 @@ namespace Hospital_Appointment_Booking_System.Models
                 entity.Property(e => e.SpecializationName)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("specialization_name");
+                    .HasColumnName("Specialization_Name");
 
                 entity.HasOne(d => d.Hospital)
                     .WithMany(p => p.Specializations)
