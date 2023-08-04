@@ -1,12 +1,12 @@
 create table Appointment(
-appointment_id int primary key identity, 
-appointment_date datetime,
-appointment_start_time datetime,
-appointment_end_time datetime, 
-slot_id int,
-hospital_id int,
-user_id int,
-FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id),
-FOREIGN KEY (slot_id) REFERENCES Slot(slot_id),
-FOREIGN KEY (user_id) REFERENCES Users(user_id)
+Appointment_Id int primary key identity, 
+Appointment_Date datetime,
+Appointment_Start_Time datetime,
+Appointment_End_Time datetime, 
+Slot_Id int,
+Hospital_Id int,
+User_Id int,
+FOREIGN KEY (Hospital_Id) REFERENCES Hospital(Hospital_Id),
+FOREIGN KEY (Slot_Id) REFERENCES Slot(Slot_Id),
+FOREIGN KEY (User_Id) REFERENCES Users(User_Id)
 )

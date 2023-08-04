@@ -1,4 +1,5 @@
-﻿using Hospital_Appointment_Booking_System.DTO;
+﻿using AutoMapper;
+using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Helpers;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
@@ -6,8 +7,8 @@ using Hospital_Appointment_Booking_System.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hospital_Appointment_Booking_System.Controllers
 {
@@ -18,9 +19,12 @@ namespace Hospital_Appointment_Booking_System.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _IUserRepository;
-        public UserController(IUserRepository iUserRepository)
+        private readonly IMapper _mapper;
+
+        public UserController(IUserRepository iUserRepository, IMapper mapper)
         {
             _IUserRepository = iUserRepository;
+            _mapper = mapper;
         }
 
         [HttpPost]
@@ -28,16 +32,8 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             try
             {
-                var user = new User
-                {
-                    Name = userDto.Name,
-                    Email = userDto.Email,
-                    Password = PasswordHasher.EncryptPassword(userDto.Password),
-                    MobileNumber = userDto.MobileNumber,
-                    RoleId = userDto.RoleId,
-                    SpecializationId = userDto.SpecializationId,
-                    HospitalId = userDto.HospitalId
-                };
+                var user = _mapper.Map<User>(userDto);
+                user.Password = PasswordHasher.EncryptPassword(userDto.Password);
 
                 bool userCreated = await _IUserRepository.AddUser(user);
                 if (!userCreated)
@@ -45,7 +41,8 @@ namespace Hospital_Appointment_Booking_System.Controllers
                     return Conflict("Email or mobile number already exists.");
                 }
 
-                return Ok(user);
+                var createdUserDto = _mapper.Map<UserDTO>(user);
+                return Ok(createdUserDto);
             }
             catch
             {
@@ -65,18 +62,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
                     return NotFound();
                 }
 
-                var userDto = new UserDTO
-                {
-                    UserId = user.UserId,
-                    Name = user.Name,
-                    Email = user.Email,
-                    Password = user.Password,
-                    MobileNumber = (long)user.MobileNumber,
-                    RoleId = user.RoleId,
-                    SpecializationId = user.SpecializationId,
-                    HospitalId = user.HospitalId
-                };
-
+                var userDto = _mapper.Map<UserDTO>(user);
                 return Ok(userDto);
             }
             catch
@@ -85,29 +71,23 @@ namespace Hospital_Appointment_Booking_System.Controllers
             }
         }
 
-
         [HttpPut("{id}")]
-            public async Task<IActionResult> UpdateUser(int id, UserDTO updatedUserDto)
+        public async Task<IActionResult> UpdateUser(int id, UserDTO updatedUserDto)
+        {
+            try
             {
                 var existingUser = await _IUserRepository.GetUserById(id);
-            try 
-            { 
-
                 if (existingUser == null)
                 {
                     return NotFound();
                 }
 
-                existingUser.Name = updatedUserDto.Name;
-                existingUser.Email = updatedUserDto.Email;
-                existingUser.Password = PasswordHasher.EncryptPassword(updatedUserDto.Password);
-                existingUser.MobileNumber = updatedUserDto.MobileNumber;
-                existingUser.RoleId = updatedUserDto.RoleId;
-                existingUser.SpecializationId = updatedUserDto.SpecializationId;
-                existingUser.HospitalId = updatedUserDto.HospitalId;
+                var updatedUser = _mapper.Map<User>(updatedUserDto);
+                updatedUser.UserId = id;
+                updatedUser.Password = PasswordHasher.EncryptPassword(updatedUserDto.Password);
 
-            var updateResult = await _IUserRepository.UpdateUser(existingUser);
-             if (!updateResult)
+                bool userUpdated = await _IUserRepository.UpdateUser(updatedUser);
+                if (!userUpdated)
                 {
                     return Conflict("Email or mobile number already exists.");
                 }
@@ -116,28 +96,33 @@ namespace Hospital_Appointment_Booking_System.Controllers
             }
             catch
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while adding user.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the user.");
             }
-            }
+        }
 
-
-            [HttpDelete("{id}")]
-            public async Task<IActionResult> DeleteUser(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            try
             {
-                try
+                var user = await _IUserRepository.GetUserById(id);
+                if (user == null)
                 {
-                    await _IUserRepository.DeleteUser(id);
-                    return Ok();
+                    return NotFound();
                 }
-                catch
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the user.");
-                }
-            }
 
-            [HttpGet]
-            public async Task<ActionResult<List<UserDTO>>> GetUsers()
+                await _IUserRepository.DeleteUser(id);
+                return Ok();
+            }
+            catch
             {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while deleting the user.");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<UserDTO>>> GetUsers()
+        {
             try
             {
                 List<UserDTO> userDTOs = await _IUserRepository.GetAllUsers();
@@ -147,15 +132,15 @@ namespace Hospital_Appointment_Booking_System.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting users.");
             }
-            }
+        }
 
-            [HttpGet("User/{roleId}")]
-            public async Task<ActionResult<List<UserDTO>>> GetUsersByRoleId(int roleId)
-            {
+        [HttpGet("User/{roleId}")]
+        public async Task<ActionResult<List<UserDTO>>> GetUsersByRoleId(int roleId)
+        {
             try
             {
-
-                List<UserDTO> userDTOs = await _IUserRepository.GetUsersByRoleId(roleId);
+                var users = await _IUserRepository.GetUsersByRoleId(roleId);
+                var userDTOs = _mapper.Map<List<UserDTO>>(users);
                 return Ok(userDTOs);
             }
             catch
@@ -170,13 +155,8 @@ namespace Hospital_Appointment_Booking_System.Controllers
             try
             {
                 var users = await _IUserRepository.GetUsersBySpecializationId(specializationId);
-
-                if (users == null || !users.Any())
-                {
-                    return NotFound();
-                }
-
-                return Ok(users);
+                var userDTOs = _mapper.Map<List<UserDTO>>(users);
+                return Ok(userDTOs);
             }
             catch
             {

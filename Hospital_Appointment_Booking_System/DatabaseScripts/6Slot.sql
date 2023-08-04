@@ -1,12 +1,12 @@
 create table Slot( 
-slot_id int primary key identity,
-slot_date datetime,
-slot_start_time datetime,
-slot_end_time datetime,
-availability_id int,
-hospital_id int,
-user_id int,
-FOREIGN KEY (availability_id) REFERENCES Availability(availability_id),
-FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id),
-FOREIGN KEY (user_id) REFERENCES Users(user_id)
+Slot_Id int primary key identity,
+Slot_Date datetime,
+Slot_Start_Time datetime,
+Slot_End_Time datetime,
+Availability_Id int,
+Hospital_Id int,
+User_Id int,
+FOREIGN KEY (Availability_Id) REFERENCES Availability(Availability_Id),
+FOREIGN KEY (Hospital_Id) REFERENCES Hospital(Hospital_Id),
+FOREIGN KEY (User_Id) REFERENCES Users(User_Id)
 )

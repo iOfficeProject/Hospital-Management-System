@@ -1,9 +1,9 @@
 create table Availability(
-availability_id int PRIMARY KEY IDENTITY,
-is_available bit,
-date date,
-start_time datetime,
-end_time datetime,
-user_id int,
-FOREIGN KEY (user_id) REFERENCES Users(user_id)
+Availability_Id int PRIMARY KEY IDENTITY,
+Is_Available bit,
+Date date,
+Start_Time datetime,
+End_Time datetime,
+User_Id int,
+FOREIGN KEY (User_Id) REFERENCES Users(User_Id)
 )

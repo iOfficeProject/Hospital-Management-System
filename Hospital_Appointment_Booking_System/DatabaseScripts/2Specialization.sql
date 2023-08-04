@@ -1,6 +1,6 @@
 create table Specialization(
-specialization_id int primary key identity,
-specialization_name varchar(255),
-hospital_id int,
-FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id)
+Specialization_Id int primary key identity,
+secialization_Name varchar(255),
+Hospital_Id int,
+FOREIGN KEY (Hospital_Id) REFERENCES Hospital(Hospital_Id)
 )
