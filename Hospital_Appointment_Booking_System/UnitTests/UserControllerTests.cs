@@ -253,7 +253,7 @@ namespace Hospital_Appointment_Booking_System.UnitTests
             Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
         }
         
-                [Fact]
+               [Fact]
                 public async Task DeleteUser_NonExistingId_ReturnsNotFoundResult()
                 {
                     // Arrange

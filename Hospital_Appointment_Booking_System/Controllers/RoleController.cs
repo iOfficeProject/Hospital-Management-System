@@ -28,7 +28,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<RoleDTO>> AddRole(RoleDTO roleDTO)
+        public async Task<IActionResult> AddRole(RoleDTO roleDTO)
         {
             try
             {
@@ -52,6 +52,11 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             try
             {
+                var user = await _IRoleRepository.GetRoleById(roleId);
+                if (user == null)
+                {
+                    return NotFound();
+                }
                 await _IRoleRepository.DeleteRole(roleId);
                 return Ok(roleId);
             }
