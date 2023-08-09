@@ -26,15 +26,15 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         }
 
         [Fact]
-        public async Task AvailabilityController_GetAvailability_ReturnOK()
+        public async Task AvailabilityController_GetAvailability()
         {
             //Arrange
-            var fakeAvailabilities = new List<Availability> 
+            var availabilities = new List<Availability> 
             { 
             new Availability { UserId = 1,IsAvailable=true,Date=DateTime.Now,StartTime=DateTime.Now,EndTime=DateTime.Now},
             new Availability { UserId = 2,IsAvailable=false,Date=DateTime.Now,StartTime=DateTime.Now,EndTime=DateTime.Now}
             };
-            A.CallTo(() => _availabilityRepository.GetAllAvailability()).Returns(fakeAvailabilities);
+            A.CallTo(() => _availabilityRepository.GetAllAvailability()).Returns(availabilities);
 
             //Act
             var result = _controller.GetAvailability();
@@ -47,12 +47,12 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         public async Task GetAvailabilityById_WithValidId_ReturnsOkResultWithData()
         {
             // Arrange
-            int fakeId = 1;
-            var fakeAvailability = new Availability { UserId = fakeId, IsAvailable = true, Date = DateTime.Now, StartTime = DateTime.Now, EndTime = DateTime.Now };
-            A.CallTo(() => _availabilityRepository.GetAvailabilityById(fakeId)).Returns(fakeAvailability);
+            int existingId = 1;
+            var fakeAvailability = new Availability { UserId = existingId, IsAvailable = true, Date = DateTime.Now, StartTime = DateTime.Now, EndTime = DateTime.Now };
+            A.CallTo(() => _availabilityRepository.GetAvailabilityById(existingId)).Returns(fakeAvailability);
 
             // Act
-            var result = await _controller.GetAvailabilityById(fakeId);
+            var result = await _controller.GetAvailabilityById(existingId);
 
             // Assert
             result.Should().BeOfType<OkObjectResult>();
@@ -64,11 +64,11 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         public async Task GetAvailabilityById_WithInvalidId_ReturnsNotFound()
         {
             // Arrange
-            int fakeId = 999; // Non-existing ID
-            A.CallTo(() => _availabilityRepository.GetAvailabilityById(fakeId)).Returns(Task.FromResult<Availability>(null));
+            int nonExistingId = 999;
+            A.CallTo(() => _availabilityRepository.GetAvailabilityById(nonExistingId)).Returns(Task.FromResult<Availability>(null));
 
             // Act
-            var result = await _controller.GetAvailabilityById(fakeId);
+            var result = await _controller.GetAvailabilityById(nonExistingId);
 
             // Assert
             result.Should().BeOfType<NotFoundResult>();
@@ -79,57 +79,55 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         public async Task AvailabilityController_AddAvailability_ReturnOK()
         {
             // Arrange
-            var fakeAvailabilityDTO = new AvailabilityDTO { UserId = 5, IsAvailable = true, Date = DateTime.Now, StartTime = DateTime.Now, EndTime = DateTime.Now };
-            var fakeAvailability = new Availability { UserId = 5, IsAvailable = true, Date = DateTime.Now, StartTime = DateTime.Now, EndTime = DateTime.Now };
+            var availabilityDTO = new AvailabilityDTO { UserId = 5, IsAvailable = true, Date = DateTime.Now, StartTime = DateTime.Now, EndTime = DateTime.Now };
+            var availability = new Availability { UserId = 5, IsAvailable = true, Date = DateTime.Now, StartTime = DateTime.Now, EndTime = DateTime.Now };
 
-            A.CallTo(() => _availabilityRepository.AddAvailability(fakeAvailability)).Returns(Task.CompletedTask);
+            A.CallTo(() => _availabilityRepository.AddAvailability(availability)).Returns(Task.CompletedTask);
 
-            A.CallTo(() => _mapper.Map<Availability>(fakeAvailabilityDTO)).Returns(fakeAvailability);
+            A.CallTo(() => _mapper.Map<Availability>(availabilityDTO)).Returns(availability);
 
-            //A.CallTo(() => _mapper.Map<Availability>(A<AvailabilityDTO>._)).Returns(fakeAvailability);
-            A.CallTo(() => _mapper.Map<AvailabilityDTO>(fakeAvailability)).Returns(fakeAvailabilityDTO);
+            A.CallTo(() => _mapper.Map<AvailabilityDTO>(availability)).Returns(availabilityDTO);
 
             // Act
-            var result = await _controller.AddAvailability(fakeAvailabilityDTO);
+            var result = await _controller.AddAvailability(availabilityDTO);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, okResult.StatusCode);
 
             var mappedAvailabilityDTO = Assert.IsType<AvailabilityDTO>(okResult.Value);
-            // Add more assertions to compare the properties of mappedAvailabilityDTO if necessary
         }
 
         [Fact]
         public async Task UpdateAvailability_WithValidData_ReturnsNoContent()
         {
             // Arrange
-            int fakeId = 1;
-            var originalStartTime = DateTime.Now.AddDays(-1); // Some initial start time
-            var updatedStartTime = DateTime.Now; // The updated start time
+            int id = 1;
+            var originalStartTime = DateTime.Now.AddDays(-1);
+            var updatedStartTime = DateTime.Now;
 
-            var fakeAvailabilityDTO = new AvailabilityDTO
+            var availabilityDTO = new AvailabilityDTO
             {
-                UserId = fakeId,
+                UserId = id,
                 IsAvailable = true,
                 Date = DateTime.Now,
                 StartTime = updatedStartTime,
                 EndTime = DateTime.Now
             };
-            var fakeAvailability = new Availability
+            var availability = new Availability
             {
-                UserId = fakeId,
+                UserId = id,
                 IsAvailable = false,
                 Date = DateTime.Now,
                 StartTime = originalStartTime,
                 EndTime = DateTime.Now
             };
-            A.CallTo(() => _availabilityRepository.GetAvailabilityById(fakeId)).Returns(fakeAvailability);
+            A.CallTo(() => _availabilityRepository.GetAvailabilityById(id)).Returns(availability);
+            A.CallTo(() => _availabilityRepository.UpdateAvailability(availability)).Returns(Task.CompletedTask); ;
 
             // Act
-            var result = await _controller.UpdateAvailability(fakeId, fakeAvailabilityDTO);
-            var updatedAvailability = await _availabilityRepository.GetAvailabilityById(fakeId);
-
+            var result = await _controller.UpdateAvailability(id, availabilityDTO);
+            var updatedAvailability = await _availabilityRepository.GetAvailabilityById(id);
 
             // Assert
             result.Should().BeOfType<NoContentResult>();
@@ -139,11 +137,11 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         public async Task UpdateAvailability_WithInvalidId_ReturnsNotFound()
         {
             // Arrange
-            int fakeId = 99; // Non-existing ID
-            A.CallTo(() => _availabilityRepository.GetAvailabilityById(fakeId)).Returns(Task.FromResult<Availability>(null));
+            int id = 99;
+            A.CallTo(() => _availabilityRepository.GetAvailabilityById(id)).Returns(Task.FromResult<Availability>(null));
 
             // Act
-            var result = await _controller.UpdateAvailability(fakeId, new AvailabilityDTO());
+            var result = await _controller.UpdateAvailability(id, new AvailabilityDTO());
 
             // Assert
             result.Should().BeOfType<NotFoundResult>();
@@ -153,12 +151,13 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         public async Task DeleteAvailability_WithValidId_ReturnsNoContent()
         {
             // Arrange
-            int fakeId = 1;
-            var fakeAvailability = new Availability { UserId = fakeId, IsAvailable = true, Date = DateTime.Now, StartTime = DateTime.Now, EndTime = DateTime.Now };
-            A.CallTo(() => _availabilityRepository.GetAvailabilityById(fakeId)).Returns(fakeAvailability);
+            int id = 1;
+            var availability = new Availability { UserId = id, IsAvailable = true, Date = DateTime.Now, StartTime = DateTime.Now, EndTime = DateTime.Now };
+            A.CallTo(() => _availabilityRepository.GetAvailabilityById(id)).Returns(availability);
+            A.CallTo(() => _availabilityRepository.DeleteAvailability(availability));
 
             // Act
-            var result = await _controller.DeleteAvailability(fakeId);
+            var result = await _controller.DeleteAvailability(id);
 
             // Assert
             result.Should().BeOfType<NoContentResult>();
@@ -168,14 +167,15 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         public async Task DeleteAvailability_WithInvalidId_ReturnsNotFound()
         {
             // Arrange
-            int fakeId = 99; 
-            A.CallTo(() => _availabilityRepository.GetAvailabilityById(fakeId)).Returns(Task.FromResult<Availability>(null));
+            int id = 99; 
+            A.CallTo(() => _availabilityRepository.GetAvailabilityById(id)).Returns(Task.FromResult<Availability>(null));
 
             // Act
-            var result = await _controller.DeleteAvailability(fakeId);
+            var result = await _controller.DeleteAvailability(id);
 
             // Assert
             result.Should().BeOfType<NotFoundResult>();
+
         }
     }
 }
