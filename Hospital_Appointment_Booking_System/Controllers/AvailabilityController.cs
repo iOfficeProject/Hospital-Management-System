@@ -1,4 +1,5 @@
-﻿using Hospital_Appointment_Booking_System.DTO;
+﻿using AutoMapper;
+using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
 using Hospital_Appointment_Booking_System.Models;
 using Microsoft.AspNetCore.Cors;
@@ -14,10 +15,12 @@ namespace Hospital_Appointment_Booking_System.Controllers
     public class AvailabilityController : ControllerBase
     {
         private readonly IAvailabilityRepository _availabilityRepository;
+        private readonly IMapper _mapper;
 
-        public AvailabilityController(IAvailabilityRepository availabilityRepository)
+        public AvailabilityController(IAvailabilityRepository availabilityRepository, IMapper mapper)
         {
             _availabilityRepository = availabilityRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -58,18 +61,12 @@ namespace Hospital_Appointment_Booking_System.Controllers
         {
             try
             {
-                var availability = new Availability
-                {
-                    IsAvailable = availabilityDTO.IsAvailable,
-                    Date = availabilityDTO.Date,
-                    StartTime = availabilityDTO.StartTime,
-                    EndTime = availabilityDTO.EndTime,
-                    UserId = availabilityDTO.UserId
-                };
+                var availability = _mapper.Map<Availability>(availabilityDTO);
 
                 await _availabilityRepository.AddAvailability(availability);
 
-                return Ok(availability);
+                var mappedAvailabilityDTO = _mapper.Map<AvailabilityDTO>(availability);
+                return Ok(mappedAvailabilityDTO);
             }
             catch (Exception)
             {
@@ -78,26 +75,17 @@ namespace Hospital_Appointment_Booking_System.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAvailability(int id, [FromBody] AvailabilityDTO availabilityDTO)
+        public async Task<IActionResult> UpdateAvailability(int id, AvailabilityDTO availabilityDTO)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
                 var availability = await _availabilityRepository.GetAvailabilityById(id);
                 if (availability == null)
                 {
                     return NotFound();
                 }
 
-                availability.IsAvailable = availabilityDTO.IsAvailable;
-                availability.Date = availabilityDTO.Date;
-                availability.StartTime = availabilityDTO.StartTime;
-                availability.EndTime = availabilityDTO.EndTime;
-                availability.UserId = availabilityDTO.UserId;
+                _mapper.Map(availabilityDTO, availability);
 
                 await _availabilityRepository.UpdateAvailability(availability);
 
