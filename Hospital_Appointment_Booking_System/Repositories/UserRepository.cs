@@ -50,6 +50,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
         public async Task<bool> UpdateUser(User updatedUser)
         {
             // Check for duplicate email and mobile number
+
             var existingUserWithEmail = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == updatedUser.Email && u.UserId != updatedUser.UserId);
             if (existingUserWithEmail != null)
             {
@@ -64,8 +65,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
 
             // Update the user properties manually
             var existingUser = await _dbContext.Users.FindAsync(updatedUser.UserId);
-            if (existingUser != null)
-            {
+            
                 existingUser.Name = updatedUser.Name;
                 existingUser.Email = updatedUser.Email;
                 existingUser.Password = updatedUser.Password;
@@ -76,9 +76,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
 
                 await _dbContext.SaveChangesAsync();
                 return true;
-            }
-
-            return false;
+         
         }
 
 
