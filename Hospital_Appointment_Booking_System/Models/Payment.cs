@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Hospital_Appointment_Booking_System.Models
+﻿namespace Hospital_Appointment_Booking_System.Models
 {
-    public partial class Payment
+    public class Payment
     {
         public int PaymentId { get; set; }
         public int? Amount { get; set; }
