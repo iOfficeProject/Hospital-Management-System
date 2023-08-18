@@ -44,7 +44,6 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 var users = await repository.GetAllUsers();
 
                 // Assert
-                // Check individual hospitals
                 var userDto1 = users.FirstOrDefault(h => h.Name == "Juli");
                 Assert.NotNull(userDto1);
                 Assert.Equal("Juli", userDto1.Name);
@@ -53,7 +52,6 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 Assert.NotNull(userDto2);
                 Assert.Equal("Juned", userDto2.Name);
 
-                // Check the count of hospitals
                 Assert.Equal(2, users.Count());
             }
         }
@@ -115,8 +113,8 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 context.Users.Add(new User
                 {
                     UserId = 1,
-                    Name = "John Doe",
-                    Email = "john@example.com",
+                    Name = "John",
+                    Email = "j@gmail.com",
                     Password = "jhgjghcgduifdgkdljghvhdfighvldfh",
                     MobileNumber = 1234567890,
                     RoleId = 1,
@@ -134,7 +132,7 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 {
                     UserId = 1,
                     Name = "JohnDoe",
-                    Email = "john@example.com",
+                    Email = "j@gmail.com",
                     Password = "jhgjghcgduifdgkdljghvhdfighvldfh",
                     MobileNumber = 1234567890,
                     RoleId = 1,

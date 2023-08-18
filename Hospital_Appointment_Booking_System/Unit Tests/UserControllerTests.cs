@@ -136,7 +136,7 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         public async Task GetUserById_NonExistingId_ReturnsNotFoundResult()
         {
             // Arrange
-            int userId = 999; // Assuming this ID does not exist in the repository
+            int userId = 999;
             A.CallTo(() => _userRepository.GetUserById(userId)).Returns(Task.FromResult<User>(null));
 
             // Act
@@ -185,7 +185,7 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         public async Task UpdateUser_NonExistingId_ReturnsNotFoundResult()
         {
             // Arrange
-            int userId = 999; // Assuming this ID does not exist in the repository
+            int userId = 999;
             var userDto = new UserDTO
             {
                 Name = "John Doe",
@@ -229,7 +229,7 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 public async Task DeleteUser_NonExistingId_ReturnsNotFoundResult()
                 {
                     // Arrange
-                    int expectedUserId = 999; // Assuming this ID does not exist in the repository
+                    int expectedUserId = 999;
 
                     A.CallTo(() => _userRepository.GetUserById(expectedUserId)).Returns(Task.FromResult<User>(null));
 

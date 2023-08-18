@@ -133,35 +133,5 @@ namespace Hospital_Appointment_Booking_System.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting users.");
             }
         }
-
-        /*[HttpGet("User/{roleId}")]
-        public async Task<ActionResult<List<UserDTO>>> GetUsersByRoleId(int roleId)
-        {
-            try
-            {
-                var users = await _IUserRepository.GetUsersByRoleId(roleId);
-                var userDTOs = _mapper.Map<List<UserDTO>>(users);
-                return Ok(userDTOs);
-            }
-            catch
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting the user.");
-            }
-        }
-
-        [HttpGet("specializedDoctors/{specializationId}")]
-        public async Task<ActionResult<List<UserDTO>>> GetUsersBySpecializationId(int specializationId)
-        {
-            try
-            {
-                var users = await _IUserRepository.GetUsersBySpecializationId(specializationId);
-                var userDTOs = _mapper.Map<List<UserDTO>>(users);
-                return Ok(userDTOs);
-            }
-            catch
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting specialized user.");
-            }
-        }*/
     }
 }
