@@ -134,7 +134,7 @@ namespace Hospital_Appointment_Booking_System.Controllers
             }
         }
 
-        [HttpGet("User/{roleId}")]
+        /*[HttpGet("User/{roleId}")]
         public async Task<ActionResult<List<UserDTO>>> GetUsersByRoleId(int roleId)
         {
             try
@@ -162,6 +162,6 @@ namespace Hospital_Appointment_Booking_System.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while getting specialized user.");
             }
-        }
+        }*/
     }
 }
