@@ -99,7 +99,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
             return _mapper.Map<List<UserDTO>>(users);
         }
 
-        public async Task<List<UserDTO>> GetUsersByRoleId(int roleId)
+       /* public async Task<List<UserDTO>> GetUsersByRoleId(int roleId)
         {
             List<User> users = await _dbContext.Users
                 .Where(u => u.RoleId == roleId)
@@ -115,6 +115,6 @@ namespace Hospital_Appointment_Booking_System.Repositories
                 .Where(u => u.SpecializationId == specializationId)
                 .ToListAsync();
             return _mapper.Map<List<UserDTO>>(users);
-        }
+        }*/
     }
 }
