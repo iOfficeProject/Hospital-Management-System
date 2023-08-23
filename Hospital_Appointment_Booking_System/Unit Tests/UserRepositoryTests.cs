@@ -102,6 +102,77 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         }
 
         [Fact]
+        public async Task AddUser_WithExistingEmailOrMobileNumber_ReturnsFalse()
+        {
+            // Arrange
+            using (var context = new Master_Hospital_ManagementContext(CreateDbContextOptions()))
+            {
+                var repository = new UserRepository(context, _fakeMapper);
+
+                var existingUserWithEmail = new User
+                {
+                    Name = "Existing User",
+                    Email = "john@example.com",
+                    Password = "existingpassword",
+                    MobileNumber = 9876543210,
+                    RoleId = 2,
+                    SpecializationId = 3,
+                    HospitalId = 4
+                };
+                context.Users.Add(existingUserWithEmail);
+                context.SaveChanges();
+
+                var userDtoWithEmail = new UserDTO
+                {
+                    Name = "John Doe",
+                    Email = "john@example.com",
+                    Password = "jhgjghcgduifdgkdljghvhdfighvldfh",
+                    MobileNumber = 1234567890,
+                    RoleId = 1,
+                    SpecializationId = 2,
+                    HospitalId = 3
+                };
+
+                // Act
+                var isAddedWithEmail = await repository.AddUser(_fakeMapper.Map<User>(userDtoWithEmail));
+
+                // Assert
+                Assert.False(isAddedWithEmail);
+
+                var existingUserWithMobileNumber = new User
+                {
+                    Name = "Existing User",
+                    Email = "existing@example.com",
+                    Password = "existingpassword",
+                    MobileNumber = 1234567890,
+                    RoleId = 2,
+                    SpecializationId = 3,
+                    HospitalId = 4
+                };
+                context.Users.Add(existingUserWithMobileNumber);
+                context.SaveChanges();
+
+                var userDtoWithMobileNumber = new UserDTO
+                {
+                    Name = "Jane Doe",
+                    Email = "jane@example.com",
+                    Password = "jhgjghcgduifdgkdljghvhdfighvldfh",
+                    MobileNumber = 1234567890,
+                    RoleId = 1,
+                    SpecializationId = 2,
+                    HospitalId = 3
+                };
+
+                // Act
+                var isAddedWithMobileNumber = await repository.AddUser(_fakeMapper.Map<User>(userDtoWithMobileNumber));
+
+                // Assert
+                Assert.False(isAddedWithMobileNumber);
+            }
+        }
+
+
+        [Fact]
         public async Task UpdateUser_WithValidData_ReturnsTrue()
         {
             // Arrange
@@ -147,6 +218,63 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         }
 
         [Fact]
+        public async Task UpdateUser_WithDuplicateEmailOrMobileNumber_ReturnsFalse()
+        {
+            // Arrange
+            var dbContextOptions = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
+                .UseInMemoryDatabase(databaseName: "TestDb")
+                .Options;
+            using (var context = new Master_Hospital_ManagementContext(dbContextOptions))
+            {
+                context.Users.Add(new User
+                {
+                    UserId = 1001,
+                    Name = "John",
+                    Email = "j@gmail.com",
+                    Password = "jhgjghcgduifdgkdljghvhdfighvldfh",
+                    MobileNumber = 1234567890,
+                    RoleId = 1,
+                    SpecializationId = 2,
+                    HospitalId = 3
+                });
+                context.SaveChanges();
+            }
+
+            using (var context = new Master_Hospital_ManagementContext(dbContextOptions))
+            {
+                var repository = new UserRepository(context, _fakeMapper);
+
+                // Act
+                var existingUser = await context.Users.FirstOrDefaultAsync(u => u.UserId == 1001);
+                var updatedUser = new User
+                {
+                    UserId = 1,
+                    Name = "JohnDoe",
+                    Email = "j@gmail.com",
+                    Password = "jhgjghcgduifdgkdljghvhdfighvldfh",
+                    MobileNumber = 9876543210, // Duplicate mobile number
+                    RoleId = 1,
+                    SpecializationId = 2,
+                    HospitalId = 3
+                };
+
+                var isUpdatedWithDuplicateMobile = await repository.UpdateUser(updatedUser);
+
+                // Assert
+                Assert.False(isUpdatedWithDuplicateMobile);
+
+                // Act
+                updatedUser.MobileNumber = 1234567890; // Valid mobile number, but duplicate email
+                updatedUser.Email = "existing@gmail.com";
+                var isUpdatedWithDuplicateEmail = await repository.UpdateUser(updatedUser);
+
+                // Assert
+                Assert.False(isUpdatedWithDuplicateEmail);
+            }
+        }
+
+
+        [Fact]
             public async Task DeleteUser_RemovesUser()
             {
                 // Arrange
@@ -168,5 +296,59 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                     Assert.Null(deletedUser);
                 }
             }
+
+        [Fact]
+        public async Task DeleteUser_UserExists_RemovesUserAndCommitsChanges()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
+                .UseInMemoryDatabase(databaseName: "DeleteUser_UserExists_RemovesUserAndCommitsChanges")
+                .Options;
+
+            using (var context = new Master_Hospital_ManagementContext(options))
+            {
+                var user = new User { UserId = 1, Name = "Juli" };
+
+                context.Users.Add(user);
+                context.SaveChanges();
+
+                var repository = new UserRepository(context, _fakeMapper);
+
+                // Act
+                await repository.DeleteUser(1);
+
+                // Assert
+                var deletedUser = await context.Users.FindAsync(1);
+                Assert.Null(deletedUser);
+            }
         }
+
+
+        [Fact]
+        public async Task DeleteUser_InvalidUserId_DoesNotRemoveUser()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
+                .UseInMemoryDatabase(databaseName: "DeleteUser_InvalidUserId_DoesNotRemoveUser")
+                .Options;
+
+            using (var context = new Master_Hospital_ManagementContext(options))
+            {
+                var user = new User { UserId = 1, Name = "Juli" };
+
+                context.Users.Add(user);
+                context.SaveChanges();
+
+                var repository = new UserRepository(context, _fakeMapper);
+
+                // Act
+                await repository.DeleteUser(-1);
+
+                // Assert
+                var notDeletedUser = await context.Users.FindAsync(1);
+                Assert.NotNull(notDeletedUser);
+            }
+        }
+
     }
+}

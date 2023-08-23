@@ -16,7 +16,7 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
 {
     public class SlotRepositoryTests
     {
-        // Test method for GetAllSlots when slots exist
+       
         [Fact]
         public async Task GetAllSlots_SlotsExist_ReturnsListOfSlots()
         {
@@ -52,7 +52,6 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
             }
         }
 
-        // Test method for GetSlotById with an existing slot
         [Fact]
         public async Task GetSlotById_ExistingId_ReturnsSlot()
         {
@@ -83,8 +82,6 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
             }
         }
 
-
-        // Test method for AddSlot
         [Fact]
         public async Task AddSlot_ValidSlot_SuccessfullyAdded()
         {
@@ -119,7 +116,6 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
             }
         }
 
-        // Test method for UpdateSlot
         [Fact]
         public async Task UpdateSlot_ExistingSlot_ValidSlot_SuccessfullyUpdated()
         {
@@ -160,7 +156,6 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
             }
         }
 
-        // Test method for DeleteSlot
         [Fact]
         public async Task DeleteSlot_ExistingSlotId_SuccessfullyDeleted()
         {
@@ -190,6 +185,29 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
             }
         }
 
+        [Fact]
+        public async Task DeleteSlot_InvalidSlotId_ThrowsArgumentException()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
+                .UseInMemoryDatabase(databaseName: "DeleteSlot_InvalidSlotId_ThrowsArgumentException")
+                .Options;
 
+            using (var context = new Master_Hospital_ManagementContext(options))
+            {
+                var slot = new Slot { SlotDate = DateTime.Today, SlotStartTime = DateTime.Now, SlotEndTime = DateTime.Now.AddHours(1) };
+
+                context.Slots.Add(slot);
+                context.SaveChanges();
+
+                var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
+                var mapper = new Mapper(mapperConfig);
+
+                var repository = new SlotRepository(context, mapper);
+
+                // Act and Assert
+                await Assert.ThrowsAsync<ArgumentException>(async () => await repository.DeleteSlot(-1));
+            }
+        }
     }
 }

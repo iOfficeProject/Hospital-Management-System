@@ -9,6 +9,5 @@ namespace Hospital_Appointment_Booking_System.Interfaces
         Task<bool> AddSpecialization(SpecializationDTO specializationDto);
         Task UpdateSpecialization(SpecializationDTO specializationDto);
         Task DeleteSpecialization(int id);
-        Task<IEnumerable<SpecializationDTO>> GetSpecializationsByHospitalId(int hospitalId);
     }
 }

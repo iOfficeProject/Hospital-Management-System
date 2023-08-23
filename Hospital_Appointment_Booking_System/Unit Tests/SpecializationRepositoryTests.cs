@@ -130,5 +130,28 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 Assert.Null(deletedSpecialization);
             }
         }
+
+        [Fact]
+        public async Task DeleteSpecialization_InvalidSpecializationId_ThrowsArgumentException()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
+                .UseInMemoryDatabase(databaseName: "DeleteSpecialization_InvalidSpecializationId_ThrowsArgumentException")
+                .Options;
+
+            using (var context = new Master_Hospital_ManagementContext(options))
+            {
+                var specialization = new Specialization { SpecializationName = "Cardio" };
+
+                context.Specializations.Add(specialization);
+                context.SaveChanges();
+
+                var repository = new SpecializationRepository(context, _fakeMapper);
+
+                // Act and Assert
+                await Assert.ThrowsAsync<ArgumentException>(async () => await repository.DeleteSpecialization(-1));
+            }
+        }
+
     }
 }

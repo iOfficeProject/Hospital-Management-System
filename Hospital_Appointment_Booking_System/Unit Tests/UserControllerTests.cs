@@ -106,6 +106,31 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         }
 
         [Fact]
+        public async Task CreateUser_Exception_ReturnsInternalServerError()
+        {
+            // Arrange
+            var userDto = new UserDTO
+            {
+                Name = "John Doe",
+                Email = "john.doe@example.com",
+                Password = "password123",
+                MobileNumber = 1234567890,
+                RoleId = 1,
+                SpecializationId = 1,
+                HospitalId = 1
+            };
+
+            A.CallTo(() => _mapper.Map<User>(userDto)).Throws(new Exception("Simulated exception"));
+
+            // Act
+            var result = await _userController.CreateUser(userDto);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
         public async Task GetUserById_ExistingId_ReturnsOkResult()
         {
             // Arrange
@@ -148,6 +173,22 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         }
 
         [Fact]
+        public async Task GetUserById_Exception_ReturnsInternalServerError()
+        {
+            // Arrange
+            int userId = 1;
+
+            A.CallTo(() => _userRepository.GetUserById(userId)).Throws(new Exception("Simulated exception"));
+
+            // Act
+            var result = await _userController.GetUserById(userId);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result.Result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
+        }
+    
+    [Fact]
         public async Task UpdateUser_ExistingId_ReturnsOkResult()
         {
             // Arrange
@@ -208,6 +249,34 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         }
 
         [Fact]
+        public async Task UpdateUser_Exception_ReturnsInternalServerError()
+        {
+            // Arrange
+            int userId = 1;
+            var userDto = new UserDTO
+            {
+                Name = "John Doe",
+                Email = "john.doe@example.com",
+                Password = "password123",
+                MobileNumber = 1234567890,
+                RoleId = 1,
+                SpecializationId = 1,
+                HospitalId = 1
+            };
+
+            A.CallTo(() => _userRepository.GetUserById(userId)).Returns(new User()); // Simulating an existing user
+
+            A.CallTo(() => _userRepository.UpdateUser(A<User>._)).Throws(new Exception("Simulated exception"));
+
+            // Act
+            var result = await _userController.UpdateUser(userId, userDto);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
+        }
+  
+    [Fact]
         public async Task DeleteUser_ExistingId_ReturnsOkResult()
         {
             // Arrange
@@ -240,6 +309,21 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                     var notFoundResult = Assert.IsType<NotFoundResult>(result);
                     Assert.Equal(StatusCodes.Status404NotFound, notFoundResult.StatusCode);
                 }
+        [Fact]
+        public async Task DeleteUser_Exception_ReturnsInternalServerError()
+        {
+            // Arrange
+            int userId = 1;
+
+            A.CallTo(() => _userRepository.GetUserById(userId)).Throws(new Exception("Simulated exception"));
+
+            // Act
+            var result = await _userController.DeleteUser(userId);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
+        }
 
         [Fact]
         public async Task GetUsers_ShouldReturnListOfUsers()
