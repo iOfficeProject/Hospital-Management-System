@@ -22,9 +22,7 @@ namespace Hospital_Appointment_Booking_System.Repositories
             var specializations = await _dbContext.Specializations.Include(s => s.Hospital).ToListAsync();
             return _mapper.Map<IEnumerable<SpecializationDTO>>(specializations);
         }
-      
-
-
+ 
         public async Task<SpecializationDTO> GetSpecializationById(int id)
         {
             var specialization = await _dbContext.Specializations.Include(s => s.Hospital)
@@ -62,15 +60,5 @@ namespace Hospital_Appointment_Booking_System.Repositories
             _dbContext.Specializations.Remove(specialization);
             await _dbContext.SaveChangesAsync();
         }
-
-        public async Task<IEnumerable<SpecializationDTO>> GetSpecializationsByHospitalId(int hospitalId)
-        {
-            var specializations = await _dbContext.Specializations
-                .Where(s => s.HospitalId == hospitalId)
-                .ToListAsync();
-
-            return _mapper.Map<IEnumerable<SpecializationDTO>>(specializations);
-        }
     }
 }
-

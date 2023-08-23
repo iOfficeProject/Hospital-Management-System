@@ -109,119 +109,6 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
             }
         }
 
-
-
-        /*  [Fact]
-          public async Task AddAppointment_ValidAppointment_SuccessfullyAdded()
-          {
-              // Arrange
-              var options = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
-                  .UseInMemoryDatabase(databaseName: "AddAppointment_ValidAppointment_SuccessfullyAdded")
-                  .Options;
-
-
-
-              using (var context = new Master_Hospital_ManagementContext(options))
-              {
-                  var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
-                  var mapper = new Mapper(mapperConfig);
-
-
-
-                  var repository = new AppointmentRepository(context, mapper);
-
-
-
-                  var appointmentDto = new AppointmentInputDTO
-                  {
-                      AppointmentDate = DateTime.Today,
-                      AppointmentStartTime = DateTime.Now,
-                      AppointmentEndTime = DateTime.Now.AddHours(1),
-                      SlotId = 1,
-                      HospitalId = 1,
-                      UserId = 1
-                  };
-
-
-
-                  // Act
-                  await repository.AddAppointment(appointmentDto);
-
-
-
-                  // Assert
-                  var addedAppointment = context.Appointments.FirstOrDefault();
-                  Assert.NotNull(addedAppointment);
-                  Assert.Equal(appointmentDto.AppointmentDate, addedAppointment.AppointmentDate);
-                  Assert.Equal(appointmentDto.AppointmentStartTime, addedAppointment.AppointmentStartTime);
-                  Assert.Equal(appointmentDto.AppointmentEndTime, addedAppointment.AppointmentEndTime);
-              }
-          }*/
-
-
-
-        /*   [Fact]
-           public async Task UpdateAppointment_ExistingId_ValidAppointment_SuccessfullyUpdated()
-           {
-               // Arrange
-               var options = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
-                   .UseInMemoryDatabase(databaseName: "UpdateAppointment_ExistingId_ValidAppointment_SuccessfullyUpdated")
-                   .Options;
-
-
-
-               using (var context = new Master_Hospital_ManagementContext(options))
-               {
-                   var appointment = new Appointment { AppointmentDate = DateTime.Today, AppointmentStartTime = DateTime.Now, AppointmentEndTime = DateTime.Now.AddHours(1) };
-
-
-
-                   context.Appointments.Add(appointment);
-                   context.SaveChanges();
-
-
-
-                   var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
-                   var mapper = new Mapper(mapperConfig);
-
-
-
-                   var repository = new AppointmentRepository(context, mapper);
-
-
-
-                   var updatedAppointmentDto = new AppointmentInputDTO
-                   {
-                       AppointmentId = appointment.AppointmentId,
-                       AppointmentDate = DateTime.Today.AddDays(1),
-                       AppointmentStartTime = DateTime.Now.AddHours(2),
-                       AppointmentEndTime = DateTime.Now.AddHours(3),
-                       SlotId = 2,
-                       HospitalId = 2,
-                       UserId = 2
-                   };
-
-
-
-                   // Act
-                   await repository.UpdateAppointment(updatedAppointmentDto);
-
-
-
-                   // Assert
-                   var updatedAppointment = context.Appointments.FirstOrDefault();
-                   Assert.NotNull(updatedAppointment);
-                   Assert.Equal(updatedAppointmentDto.AppointmentDate, updatedAppointment.AppointmentDate);
-                   Assert.Equal(updatedAppointmentDto.AppointmentStartTime, updatedAppointment.AppointmentStartTime);
-                   Assert.Equal(updatedAppointmentDto.AppointmentEndTime, updatedAppointment.AppointmentEndTime);
-                   Assert.Equal(updatedAppointmentDto.SlotId, updatedAppointment.SlotId);
-                   Assert.Equal(updatedAppointmentDto.HospitalId, updatedAppointment.HospitalId);
-                   Assert.Equal(updatedAppointmentDto.UserId, updatedAppointment.UserId);
-               }
-           }*/
-
-
-
         [Fact]
         public async Task DeleteAppointment_ExistingId_SuccessfullyDeleted()
         {
@@ -230,40 +117,47 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
                 .UseInMemoryDatabase(databaseName: "DeleteAppointment_ExistingId_SuccessfullyDeleted")
                 .Options;
 
-
-
             using (var context = new Master_Hospital_ManagementContext(options))
             {
                 var appointment = new Appointment { AppointmentDate = DateTime.Today, AppointmentStartTime = DateTime.Now, AppointmentEndTime = DateTime.Now.AddHours(1) };
 
-
-
                 context.Appointments.Add(appointment);
                 context.SaveChanges();
-
-
-
                 var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
                 var mapper = new Mapper(mapperConfig);
-
-
-
                 var repository = new AppointmentRepository(context, mapper);
-
-
-
                 // Act
                 await repository.DeleteAppointment(appointment.AppointmentId);
-
-
-
                 // Assert
                 var deletedAppointment = context.Appointments.FirstOrDefault();
                 Assert.Null(deletedAppointment);
             }
         }
 
+        [Fact]
+        public async Task DeleteAppointment_InvalidId_ThrowsArgumentException()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
+                .UseInMemoryDatabase(databaseName: "DeleteAppointment_InvalidId_ThrowsArgumentException")
+                .Options;
 
+            using (var context = new Master_Hospital_ManagementContext(options))
+            {
+                var appointment = new Appointment { AppointmentDate = DateTime.Today, AppointmentStartTime = DateTime.Now, AppointmentEndTime = DateTime.Now.AddHours(1) };
+                context.Appointments.Add(appointment);
+                context.SaveChanges();
+                var invalidAppointmentId = -1; 
+
+                var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
+                var mapper = new Mapper(mapperConfig);
+
+                var repository = new AppointmentRepository(context, mapper);
+
+                // Act and Assert
+                await Assert.ThrowsAsync<ArgumentException>(() => repository.DeleteAppointment(invalidAppointmentId));
+            }
+        }
 
         [Fact]
         public async Task GetAppointmentsByUserId_ExistingUserId_ReturnsListOfAppointments()
@@ -272,9 +166,6 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
             var options = new DbContextOptionsBuilder<Master_Hospital_ManagementContext>()
                 .UseInMemoryDatabase(databaseName: "GetAppointmentsByUserId_ExistingUserId_ReturnsListOfAppointments")
                 .Options;
-
-
-
             using (var context = new Master_Hospital_ManagementContext(options))
             {
                 var userId = 1;
@@ -283,27 +174,13 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests.Repositories
                     new Appointment { AppointmentDate = DateTime.Today, AppointmentStartTime = DateTime.Now, AppointmentEndTime = DateTime.Now.AddHours(1), UserId = userId },
                     new Appointment { AppointmentDate = DateTime.Today.AddDays(1), AppointmentStartTime = DateTime.Now.AddHours(2), AppointmentEndTime = DateTime.Now.AddHours(3), UserId = userId }
                 };
-
-
-
                 context.Appointments.AddRange(appointments);
                 context.SaveChanges();
-
-
-
                 var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
                 var mapper = new Mapper(mapperConfig);
-
-
-
                 var repository = new AppointmentRepository(context, mapper);
-
-
-
                 // Act
                 var result = await repository.GetAppointmentsByUserId(userId);
-
-
 
                 // Assert
                 Assert.Equal(appointments.Count, result.Count());

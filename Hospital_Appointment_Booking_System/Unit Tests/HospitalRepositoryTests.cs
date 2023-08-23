@@ -94,6 +94,28 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         }
 
         [Fact]
+        public async Task AddHospital_HospitalAlreadyExists_ReturnsFalse()
+        {
+            // Arrange
+            using (var context = new Master_Hospital_ManagementContext(CreateDbContextOptions()))
+            {
+                var existingHospital = new Hospital { HospitalName = "Existing Hospital", Location = "Existing Location" };
+                context.Hospitals.Add(existingHospital);
+                context.SaveChanges();
+
+                var repository = new HospitalRepository(context, _fakeMapper);
+
+                // Act
+                var hospitalDto = new HospitalDTO { HospitalName = "Existing Hospital", Location = "Existing Location" };
+                var isAdded = await repository.AddHospital(hospitalDto);
+
+                // Assert
+                Assert.False(isAdded);
+            }
+        }
+
+
+        [Fact]
         public async Task UpdateHospital_WithValidData_ReturnsTrue()
         {
             // Arrange
@@ -141,6 +163,27 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 var deletedHospital = await context.Hospitals.FindAsync(1);
                 Assert.Null(deletedHospital);
             }
-        }    
+        }
+
+        [Fact]
+        public async Task DeleteHospital_HospitalExists_RemovesHospital()
+        {
+            // Arrange
+            using (var context = new Master_Hospital_ManagementContext(CreateDbContextOptions()))
+            {
+                var hospital = new Hospital { HospitalId = 1, HospitalName = "Hospital 1", Location = "Location 1" };
+                context.Hospitals.Add(hospital);
+                context.SaveChanges();
+
+                var repository = new HospitalRepository(context, _fakeMapper);
+
+                // Act
+                await repository.DeleteHospital(1);
+
+                // Assert
+                var deletedHospital = await context.Hospitals.FindAsync(1);
+                Assert.Null(deletedHospital);
+            }
+        }
     }
 }

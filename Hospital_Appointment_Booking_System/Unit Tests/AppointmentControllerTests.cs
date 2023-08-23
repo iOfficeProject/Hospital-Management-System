@@ -60,6 +60,23 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         }
 
         [Fact]
+        public async Task GetAppointmentById_AppointmentIsNull_ReturnsNotFoundResult()
+        {
+            // Arrange
+            int appointmentId = 1;
+            AppointmentDTO expectedAppointment = null;
+
+            A.CallTo(() => _appointmentRepository.GetAppointmentById(appointmentId)).Returns(expectedAppointment);
+
+            // Act
+            var result = await _appointmentController.GetAppointmentById(appointmentId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundResult>(result);
+            Assert.Equal(StatusCodes.Status404NotFound, notFoundResult.StatusCode);
+        }
+
+        [Fact]
         public async Task AddAppointment_ValidAppointment_ReturnsOkResult()
         {
             // Arrange

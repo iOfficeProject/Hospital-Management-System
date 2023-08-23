@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FakeItEasy;
+using FluentAssertions;
 using Hospital_Appointment_Booking_System.Controllers;
 using Hospital_Appointment_Booking_System.DTO;
 using Hospital_Appointment_Booking_System.Interfaces;
@@ -54,6 +55,20 @@ namespace Hospital_Appointment_Booking_System.UnitTests
         }
 
         [Fact]
+        public async Task GetHospital_WithNonExistingId_ReturnsNotFound()
+        {
+            // Arrange
+            int nonExistingId = 999;
+            A.CallTo(() => _fakeHospitalRepository.GetByIdHospital(nonExistingId)).Returns(Task.FromResult<HospitalDTO>(null));
+
+            // Act
+            var result = await _controller.GetHospital(nonExistingId);
+
+            // Assert
+            result.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
         public async Task GetAllHospitals_ReturnsEmptyResult()
         {
             // Arrange
@@ -71,6 +86,7 @@ namespace Hospital_Appointment_Booking_System.UnitTests
             var actualHospitals = Assert.IsType<List<HospitalDTO>>(okResult.Value);
             Assert.Empty(actualHospitals);
         }
+
 
         [Fact]
         public async Task GetHospitalById_ReturnsHospitalDTO()
@@ -148,11 +164,31 @@ namespace Hospital_Appointment_Booking_System.UnitTests
             Assert.Equal(fakeHospitalDTO.HospitalName, updatedHospitalDTO.HospitalName);
             Assert.Equal(fakeHospitalDTO.Location, updatedHospitalDTO.Location);
         }
+        [Fact]
+        public async Task UpdateHospital_WithValidDataAndNoHospitalFound_ReturnsNotFoundResult()
+        {
+            // Arrange
+            int fakeHospitalId = 1;
+            var fakeHospitalDTO = new HospitalDTO { HospitalName = "Updated Ruby", Location = "Updated Pune" };
 
+            A.CallTo(() => _fakeHospitalRepository.UpdateHospital(fakeHospitalId, fakeHospitalDTO))
+                .Returns(true);
+
+            A.CallTo(() => _fakeHospitalRepository.GetByIdHospital(fakeHospitalId))
+                .Returns(Task.FromResult<HospitalDTO>(null));
+
+            // Act
+            var result = await _controller.UpdateHospital(fakeHospitalId, fakeHospitalDTO);
+
+            // Assert
+            var notFoundResult = Assert.IsType<ActionResult<HospitalDTO>>(result);
+            notFoundResult.Result.Should().BeOfType<NotFoundResult>();
+
+        }
 
 
         [Fact]
-        public async Task DeleteSpecialization_ReturnsOkResult()
+        public async Task DeleteHospital_ReturnsOkResult()
         {
             // Arrange
             int hospitalId = 1;

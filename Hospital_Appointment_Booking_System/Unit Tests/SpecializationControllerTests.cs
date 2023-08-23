@@ -71,29 +71,6 @@ namespace Hospital_Appointment_Booking_System.Tests.Controllers
         }
 
         [Fact]
-        public async Task GetSpecializationsByHospitalId_ReturnsListOfSpecializationDTOs()
-        {
-            // Arrange
-            int hospitalId = 1;
-            var expectedSpecializations = new List<SpecializationDTO>
-            {
-                new SpecializationDTO { SpecializationId = 1, SpecializationName = "Cardio" },
-                new SpecializationDTO { SpecializationId = 2, SpecializationName = "Dental Care" }
-            };
-            A.CallTo(() => _specializationRepository.GetSpecializationsByHospitalId(hospitalId)).Returns(expectedSpecializations);
-
-            // Act
-            var result = await _controller.GetSpecializationsByHospitalId(hospitalId);
-
-            // Assert
-            var okResult = Assert.IsType<OkObjectResult>(result);
-            var actualSpecializations = Assert.IsType<List<SpecializationDTO>>(okResult.Value);
-            Assert.Equal(expectedSpecializations.Count, actualSpecializations.Count);
-            Assert.Equal(expectedSpecializations[0].SpecializationId, actualSpecializations[0].SpecializationId);
-            Assert.Equal(expectedSpecializations[1].SpecializationName, actualSpecializations[1].SpecializationName);
-        }
-
-        [Fact]
         public async Task GetSpecializationById_ReturnsSpecializationDTO()
         {
             // Arrange
@@ -112,6 +89,23 @@ namespace Hospital_Appointment_Booking_System.Tests.Controllers
         }
 
         [Fact]
+        public async Task GetSpecializationById_SpecializationIsNull_ReturnsNotFoundResult()
+        {
+            // Arrange
+            int specializationId = 1;
+            SpecializationDTO expectedSpecialization = null; 
+
+            A.CallTo(() => _specializationRepository.GetSpecializationById(specializationId)).Returns(expectedSpecialization);
+
+            // Act
+            var result = await _controller.GetSpecializationById(specializationId);
+
+            // Assert
+            var notFoundResult = Assert.IsType<NotFoundResult>(result);
+            Assert.Equal(StatusCodes.Status404NotFound, notFoundResult.StatusCode);
+        }
+
+        [Fact]
         public async Task AddSpecialization_ReturnsOkResult()
         {
             // Arrange
@@ -126,6 +120,44 @@ namespace Hospital_Appointment_Booking_System.Tests.Controllers
 
             // Assert
             var okResult = Assert.IsType<OkResult>(result);
+        }
+
+        [Fact]
+        public async Task AddSpecialization_SpecializationAlreadyExists_ReturnsConflictResult()
+        {
+            // Arrange
+            var specializationDto = new SpecializationDTO
+            {
+                SpecializationName = "Dental Care"
+            };
+            A.CallTo(() => _specializationRepository.AddSpecialization(specializationDto)).Returns(false);
+
+            // Act
+            var result = await _controller.AddSpecialization(specializationDto);
+
+            // Assert
+            var conflictResult = Assert.IsType<ConflictObjectResult>(result);
+            Assert.Equal(StatusCodes.Status409Conflict, conflictResult.StatusCode);
+            Assert.Equal("Specialization name already exists.", conflictResult.Value);
+        }
+
+        [Fact]
+        public async Task AddSpecialization_Exception_ReturnsInternalServerError()
+        {
+            // Arrange
+            var specializationDto = new SpecializationDTO
+            {
+                SpecializationName = "Dental Care"
+            };
+
+            A.CallTo(() => _specializationRepository.AddSpecialization(specializationDto)).Throws(new Exception("Simulated exception"));
+
+            // Act
+            var result = await _controller.AddSpecialization(specializationDto);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
         }
 
         [Fact]

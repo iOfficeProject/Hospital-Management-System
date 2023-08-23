@@ -103,5 +103,40 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 Assert.IsType<BadRequestObjectResult>(result);
             }
         }
+
+        [Fact]
+        public async Task Post_InvalidPassword_ReturnsBadRequest()
+        {
+            // Arrange
+            using (var context = CreateDbContext())
+            {
+                var user = new User
+                {
+                    UserId = 1,
+                    Name = "Jay Sharma",
+                    Email = "jay@gmail.com",
+                    Password = PasswordHasher.EncryptPassword("Pass@123"),
+                    MobileNumber = 1234567890,
+                    RoleId = 1,
+                    SpecializationId = 1,
+                    HospitalId = 1
+                };
+
+                context.Users.Add(user);
+                context.Roles.Add(new Role { RoleId = 1, RoleName = "User" });
+                context.SaveChanges();
+
+                var controller = new LoginController(_fakeConfiguration, context);
+                A.CallTo(() => _fakeConfiguration["Jwt:Key"]).Returns("01234567890123456789012345678901");
+
+                // Act
+                var result = await controller.Post(new UserDTO { Email = "jay@gmail.com", Password = "WrongPassword" });
+
+                // Assert
+                var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+                Assert.Equal(StatusCodes.Status400BadRequest, badRequestResult.StatusCode);
+                Assert.Equal("Invalid credentials", badRequestResult.Value);
+            }
+        }
     }
 }

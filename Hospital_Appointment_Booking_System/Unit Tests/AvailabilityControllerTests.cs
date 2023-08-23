@@ -29,8 +29,8 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         public async Task AvailabilityController_GetAvailability()
         {
             //Arrange
-            var availabilities = new List<Availability> 
-            { 
+            var availabilities = new List<Availability>
+            {
             new Availability { UserId = 1,IsAvailable=true,Date=DateTime.Now,StartTime=DateTime.Now,EndTime=DateTime.Now},
             new Availability { UserId = 2,IsAvailable=false,Date=DateTime.Now,StartTime=DateTime.Now,EndTime=DateTime.Now}
             };
@@ -167,7 +167,7 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
         public async Task DeleteAvailability_WithInvalidId_ReturnsNotFound()
         {
             // Arrange
-            int id = 99; 
+            int id = 99;
             A.CallTo(() => _availabilityRepository.GetAvailabilityById(id)).Returns(Task.FromResult<Availability>(null));
 
             // Act
@@ -177,5 +177,6 @@ namespace Hospital_Appointment_Booking_System.Unit_Tests
             result.Should().BeOfType<NotFoundResult>();
 
         }
+
     }
 }
