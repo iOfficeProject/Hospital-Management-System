@@ -64,6 +64,5 @@ namespace Hospital_Appointment_Booking_System.Repositories
 
             return _mapper.Map<IEnumerable<AppointmentDTO>>(appointments);
         }
-
     }
 }
