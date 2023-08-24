@@ -204,5 +204,53 @@ namespace Hospital_Appointment_Booking_System.UnitTests
 
         }
 
+        [Fact]
+        public async Task CreateHospital_WithException_ReturnsInternalServerError()
+        {
+            // Arrange
+            var hospitalDto = new HospitalDTO { HospitalName = "Metro Hospital", Location = "Pune" };
+            A.CallTo(() => _fakeHospitalRepository.AddHospital(hospitalDto)).Throws(new Exception("Simulated exception"));
+
+            // Act
+            var result = await _controller.CreateHospital(hospitalDto);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task UpdateHospital_WithException_ReturnsInternalServerError()
+        {
+            // Arrange
+            int fakeHospitalId = 1;
+            var fakeHospitalDTO = new HospitalDTO { HospitalName = "Updated Ruby", Location = "Updated Pune" };
+
+            A.CallTo(() => _fakeHospitalRepository.UpdateHospital(fakeHospitalId, fakeHospitalDTO))
+                .Throws(new Exception("Simulated exception"));
+
+            // Act
+            var result = await _controller.UpdateHospital(fakeHospitalId, fakeHospitalDTO);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result.Result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteHospital_WithException_ReturnsInternalServerError()
+        {
+            // Arrange
+            int hospitalId = 1;
+            A.CallTo(() => _fakeHospitalRepository.DeleteHospital(hospitalId))
+                .Throws(new Exception("Simulated exception"));
+
+            // Act
+            var result = await _controller.DeleteHospital(hospitalId);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
+        }
     }
 }

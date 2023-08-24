@@ -81,7 +81,8 @@ namespace Hospital_Appointment_Booking_System.UnitTests
 
                 Assert.NotNull(token);
                 Assert.NotNull(roleName);
-                  
+                Assert.Equal("User", roleName);
+
             }
         }
 
@@ -138,5 +139,54 @@ namespace Hospital_Appointment_Booking_System.UnitTests
                 Assert.Equal("Invalid credentials", badRequestResult.Value);
             }
         }
+
+        [Fact]
+        public async Task Post_MissingUserData_ReturnsBadRequest()
+        {
+            // Arrange
+            using (var context = CreateDbContext())
+            {
+                var controller = new LoginController(_fakeConfiguration, context);
+
+                // Act
+                var result = await controller.Post(null);
+
+                // Assert
+                var badRequestResult = Assert.IsType<BadRequestResult>(result);
+            }
+        }
+
+        [Fact]
+        public async Task Post_MissingEmail_ReturnsBadRequest()
+        {
+            // Arrange
+            using (var context = CreateDbContext())
+            {
+                var controller = new LoginController(_fakeConfiguration, context);
+
+                // Act
+                var result = await controller.Post(new UserDTO { Password = "Pass@123" });
+
+                // Assert
+                var badRequestResult = Assert.IsType<BadRequestResult>(result);
+            }
+        }
+
+        [Fact]
+        public async Task Post_MissingPassword_ReturnsBadRequest()
+        {
+            // Arrange
+            using (var context = CreateDbContext())
+            {
+                var controller = new LoginController(_fakeConfiguration, context);
+
+                // Act
+                var result = await controller.Post(new UserDTO { Email = "jay@gmail.com" });
+
+                // Assert
+                var badRequestResult = Assert.IsType<BadRequestResult>(result);
+            }
+        }
+
     }
 }

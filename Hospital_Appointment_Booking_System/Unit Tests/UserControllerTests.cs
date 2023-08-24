@@ -275,8 +275,38 @@ namespace Hospital_Appointment_Booking_System.UnitTests
             var statusCodeResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(StatusCodes.Status500InternalServerError, statusCodeResult.StatusCode);
         }
-  
-    [Fact]
+
+        [Fact]
+        public async Task UpdateUser_WhenEmailOrMobileNumberExists_ReturnsConflict()
+        {
+            // Arrange
+            var userId = 1;
+            var userDto = new UserDTO
+            {
+                Name = "John Doe",
+                Email = "john.doe@example.com",
+                Password = "password123",
+                MobileNumber = 1234567890,
+                RoleId = 1,
+                SpecializationId = 1,
+                HospitalId = 1
+            };
+
+            A.CallTo(() => _userRepository.GetUserById(userId)).Returns(new User()); // Simulating an existing user
+            A.CallTo(() => _userRepository.UpdateUser(A<User>._)).Returns(false); // Simulating existing email or mobile number
+
+            var controller = new UserController(_userRepository, _mapper);
+
+            // Act
+            var result = await controller.UpdateUser(userId, userDto);
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ConflictObjectResult>(result);
+            Assert.Equal(StatusCodes.Status409Conflict, statusCodeResult.StatusCode);
+            Assert.Equal("Email or mobile number already exists.", statusCodeResult.Value);
+        }
+
+        [Fact]
         public async Task DeleteUser_ExistingId_ReturnsOkResult()
         {
             // Arrange
@@ -361,5 +391,20 @@ namespace Hospital_Appointment_Booking_System.UnitTests
             Assert.IsType<OkObjectResult>(okResult.Result);
         }
 
+        [Fact]
+        public async Task GetUsers_Exception_ReturnsInternalServerError()
+        {
+            // Arrange
+            A.CallTo(() => _userRepository.GetAllUsers()).Throws(new Exception("Simulated exception"));
+
+            var controller = new UserController(_userRepository, _mapper);
+
+            // Act
+            var result = await controller.GetUsers();
+
+            // Assert
+            var statusCodeResult = Assert.IsType<ActionResult<List<UserDTO>>>(result);
+            Assert.IsType<ObjectResult>(statusCodeResult.Result);
+        }
     }
 }
