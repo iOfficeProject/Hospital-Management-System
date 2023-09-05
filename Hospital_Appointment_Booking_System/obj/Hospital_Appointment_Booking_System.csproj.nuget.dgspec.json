@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rahulud\\Source\\Repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {}
+    "C:\\Users\\julik\\source\\repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rahulud\\Source\\Repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {
+    "C:\\Users\\julik\\source\\repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rahulud\\Source\\Repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
+        "projectUniqueName": "C:\\Users\\julik\\source\\repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
         "projectName": "Hospital_Appointment_Booking_System",
-        "projectPath": "C:\\Users\\rahulud\\Source\\Repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
-        "packagesPath": "C:\\Users\\rahulud\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rahulud\\Source\\Repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\obj\\",
+        "projectPath": "C:\\Users\\julik\\source\\repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\Hospital_Appointment_Booking_System.csproj",
+        "packagesPath": "C:\\Users\\julik\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\julik\\source\\repos\\hospital_appointment_booking_system\\Hospital_Appointment_Booking_System\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\rahulud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\julik\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +47,14 @@
               "target": "Package",
               "version": "[12.0.0, )"
             },
+            "FakeItEasy": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            },
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[6.11.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -58,6 +69,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -68,6 +83,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.7.1, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.15.1, )"
@@ -75,6 +94,30 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "xunit.core": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "xunit.extensibility.core": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "xunit.runner.console": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.5.0, )"
             }
           },
           "imports": [
@@ -96,7 +139,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
