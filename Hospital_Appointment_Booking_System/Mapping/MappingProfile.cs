@@ -11,6 +11,7 @@ namespace Hospital_Appointment_Booking_System.Mapping
             CreateMap<User, UserDTO>()
             .ForMember(dest => dest.Role, opt => opt.MapFrom(src => new RoleDTO { RoleId = src.Role.RoleId, RoleName = src.Role.RoleName }))
             .ReverseMap();
+            CreateMap<UserDTO, User>().ReverseMap();
             CreateMap<SpecializationDTO, Specialization>().ReverseMap();
             CreateMap<SlotDTO, Slot>().ReverseMap();
             CreateMap<RoleDTO, Role>().ReverseMap();
